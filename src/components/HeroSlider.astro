@@ -1,0 +1,39 @@
+---
+const images = [
+  "/slides/slide-1.jpg",
+  "/slides/slide-2.jpg",
+  "/slides/slide-3.jpg",
+];
+---
+
+<div class="relative w-full h-96 rounded-3xl overflow-hidden bg-gray-100">
+  <div id="hero-slider" class="w-full h-full">
+    {
+      images.map((img) => (
+        <img
+          src={img}
+          class="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-700"
+          loading="lazy"
+        />
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll("#hero-slider img");
+  let index = 0;
+
+  function showSlide(i) {
+    slides.forEach((s, idx) => {
+      s.style.opacity = idx === i ? 1 : 0;
+    });
+  }
+
+  showSlide(index);
+
+  setInterval(() => {
+    index = (index + 1) % slides.length;
+    showSlide(index);
+  }, 4500);
+</script>

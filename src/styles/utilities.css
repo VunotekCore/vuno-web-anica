@@ -1,0 +1,5 @@
+@layer utilities {
+    .container-default {
+        @apply max-w-screen-xl mx-auto px-4;
+    }
+}
