@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+@theme {
+    /* Configuración de fuentes personalizadas */
+    --font-montserrat: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+    --font-lobster: 'Lobster', cursive;
+}
