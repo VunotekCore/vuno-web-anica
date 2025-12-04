@@ -11,9 +11,9 @@ const images = [
 ];
 ---
 
-<div class="max-w-lvh mx-auto">
+<div class="w-full max-w-5xl mx-auto">
   <!-- Swiper Container -->
-  <div class="swiper heroSwiper rounded-3xl overflow-hidden">
+  <div class="swiper heroSwiper rounded-3xl overflow-hidden shadow-sm">
     <div class="swiper-wrapper">
       {
         images.map((src) => (
@@ -40,7 +40,7 @@ const images = [
     </div>
 
     <!-- Pagination dots -->
-    <div class="swiper-pagination bottom-6"></div>
+    <div class="swiper-pagination !bottom-6"></div>
   </div>
 </div>
 
@@ -82,7 +82,7 @@ const images = [
         clickable: true,
         bulletActiveClass: "bg-white",
         bulletClass:
-          "inline-block w-3 h-3 rounded-full bg-white/60 mx-1.5 cursor-pointer transition-all",
+          "inline-block w-3 h-3 rounded-full bg-black/60 mx-1.5 cursor-pointer transition-all",
       },
 
       // Navegación (flechas)
@@ -96,16 +96,6 @@ const images = [
         640: { slidesPerView: 1 },
         768: { slidesPerView: 1 },
         1024: { slidesPerView: 1 },
-      },
-
-      // Pausa al hover (opcional, pero recomendado)
-      on: {
-        touchStart() {
-          this.autoplay.stop();
-        },
-        touchEnd() {
-          this.autoplay.start();
-        },
       },
     });
   });
@@ -140,7 +130,7 @@ const images = [
   .swiper-button-prev {
     width: 56px !important;
     height: 56px !important;
-    background: rgba(0, 0, 0, 0.3) !important;
+    background: #515151 !important;
     border-radius: 50% !important;
     backdrop-filter: blur(8px) !important;
     transition: all 0.3s ease !important;
@@ -148,7 +138,7 @@ const images = [
 
   .swiper-button-next:hover,
   .swiper-button-prev:hover {
-    background: rgba(0, 0, 0, 0.5) !important;
+    background: #515151 !important;
     transform: scale(1.1) !important;
   }
 </style>
