@@ -4,7 +4,7 @@ import HeroSlider from "../components/HeroSlider.astro";
 
 <!-- components/Hero.astro -->
 <section
-  class="w-full bg-amber-700 flex-shrink-0
+  class="w-full flex-shrink-0
     min-h-auto
     md:min-h-[calc(100vh-105px)]
     flex items-center justify-center"
@@ -24,7 +24,7 @@ import HeroSlider from "../components/HeroSlider.astro";
         <!-- Contenido Derecho -->
         <div class="w-full max-w-sm">
           <div
-            class="flex items-center bg-white border rounded-full shadow-sm px-5 py-3"
+            class="flex items-center bg-white border border-[#515151] rounded-xl shadow-sm px-5 py-3"
           >
             <input
               type="text"
@@ -35,7 +35,7 @@ import HeroSlider from "../components/HeroSlider.astro";
               width="20"
               height="20"
               fill="none"
-              stroke="currentColor"
+              stroke="#515151"
               stroke-width="2"
             >
               <path d="M11 19l-4-4m0 0a6 6 0 1110.472-3.472A6 6 0 017 15z"
@@ -45,7 +45,7 @@ import HeroSlider from "../components/HeroSlider.astro";
         </div>
 
         <!-- WhatsApp contact -->
-        <div class="flex flex-col items-center text-center gap-2 mt-20">
+        <div class="flex flex-col items-center text-center gap-2 mt-16">
           <a
             href="https://wa.me/50499999999"
             class="flex items-center gap-3 bg-green-500 text-white px-5 py-2 rounded-full hover:bg-green-600 transition"
@@ -60,10 +60,10 @@ import HeroSlider from "../components/HeroSlider.astro";
         </div>
 
         <!-- Social icons -->
-        <div class="flex items-center gap-12 pt-4 mt-4">
+        <div class="flex items-center gap-12 pt-4 mt-3">
           <!-- Instagram -->
           <a href="#" class="transition hover:text-heading-1 hover:scale-105">
-            <svg width="42" height="42" fill="currentColor">
+            <svg width="42" height="42" fill="#515151">
               <use xlink:href="./assets/sprite.svg#instagram"></use>
             </svg>
             <span class="sr-only">social link</span>
@@ -71,17 +71,38 @@ import HeroSlider from "../components/HeroSlider.astro";
 
           <!-- Facebook -->
           <a href="#" class="transition hover:text-heading-1 hover:scale-105">
-            <svg width="42" height="42" fill="currentColor">
+            <svg width="42" height="42" fill="#515151">
               <use xlink:href="./assets/sprite.svg#fb"></use>
             </svg>
             <span class="sr-only">Facebook Link</span>
           </a>
           <!-- Location -->
           <a href="#" class="transition hover:text-heading-1 hover:scale-105">
-            <svg width="42" height="42" fill="currentColor">
+            <svg width="42" height="42" fill="#515151">
               <use xlink:href="./assets/sprite.svg#location"></use>
             </svg>
             <span class="sr-only">social link</span>
+          </a>
+        </div>
+        <div
+          class="flex items-center gap-3 pt-4 text-[#515151] hover:text-heading-1 transition cursor-pointer"
+        >
+          <a
+            href="mailto:info@anicasolucionesintegrales.com"
+            class="pt-4 px-5 py-3 transition text-[#515151] text-2xl flex items-center gap-3"
+          >
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              stroke="#515151"
+              stroke-width="1.5"
+              class="text-gray-700"
+            >
+              <path d="M2 4l8 6 8-6M2 4h16v12H2z"></path>
+            </svg>
+
+            <span class="font-medium">Contactanos por correo</span>
           </a>
         </div>
       </div>
