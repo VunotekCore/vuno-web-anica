@@ -1,39 +1,144 @@
 ---
+// components/HeroSlider.astro
 const images = [
-  "/slides/slide-1.jpg",
-  "/slides/slide-2.jpg",
-  "/slides/slide-3.jpg",
+  "/assets/slides/slide-1.webp",
+  "/assets/slides/slide-2.webp",
+  "/assets/slides/slide-3.webp",
+  "/assets/slides/slide-4.webp",
+  "/assets/slides/slide-5.webp",
+  "/assets/slides/slide-6.webp",
+  "/assets/slides/slide-7.webp",
 ];
 ---
 
-<div class="relative w-full h-96 rounded-3xl overflow-hidden bg-gray-100">
-  <div id="hero-slider" class="w-full h-full">
-    {
-      images.map((img) => (
-        <img
-          src={img}
-          class="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-700"
-          loading="lazy"
-        />
-      ))
-    }
+<div class="w-full max-w-5xl mx-auto">
+  <!-- Swiper Container -->
+  <div class="swiper heroSwiper rounded-3xl overflow-hidden shadow-sm">
+    <div class="swiper-wrapper">
+      {
+        images.map((src) => (
+          <div class="swiper-slide">
+            <img
+              src={src}
+              alt="Slide"
+              class="w-full h-full object-contain"
+              loading="lazy"
+            />
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Navigation arrows -->
+    <div
+      class="swiper-button-next !text-white/80 hover:!text-white after:!text-4xl"
+    >
+    </div>
+    <div
+      class="swiper-button-prev !text-white/80 hover:!text-white after:!text-4xl"
+    >
+    </div>
+
+    <!-- Pagination dots -->
+    <div class="swiper-pagination !bottom-6"></div>
   </div>
 </div>
 
+<!-- Swiper JS + Inicialización -->
 <script>
-  const slides = document.querySelectorAll("#hero-slider img");
-  let index = 0;
+  import Swiper from "swiper";
+  import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/effect-fade";
+  import "swiper/css/navigation";
+  import "swiper/css/pagination";
 
-  function showSlide(i) {
-    slides.forEach((s, idx) => {
-      s.style.opacity = idx === i ? 1 : 0;
+  document.addEventListener("DOMContentLoaded", () => {
+    new Swiper(".heroSwiper", {
+      // Registrar módulos
+      modules: [Navigation, Pagination, Autoplay, EffectFade],
+
+      // Efecto fade (el más elegante para hero)
+      effect: "fade",
+      fadeEffect: {
+        crossFade: true,
+      },
+
+      // Autoplay
+      autoplay: {
+        delay: 4500,
+        disableOnInteraction: false,
+      },
+
+      // Loop infinito
+      loop: true,
+
+      // Velocidad de transición
+      speed: 1200,
+
+      // Paginación (puntos)
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        bulletActiveClass: "bg-white",
+        bulletClass:
+          "inline-block w-3 h-3 rounded-full bg-black/60 mx-1.5 cursor-pointer transition-all",
+      },
+
+      // Navegación (flechas)
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+
+      // Responsive
+      breakpoints: {
+        640: { slidesPerView: 1 },
+        768: { slidesPerView: 1 },
+        1024: { slidesPerView: 1 },
+      },
     });
+  });
+</script>
+
+<style is:global>
+  /* Estilos personalizados para que quede brutal */
+  .heroSwiper {
+    aspect-ratio: 4 / 3;
+    max-height: 80vh;
   }
 
-  showSlide(index);
+  @media (min-width: 768px) {
+    .heroSwiper {
+      aspect-ratio: 16 / 10;
+    }
+  }
 
-  setInterval(() => {
-    index = (index + 1) % slides.length;
-    showSlide(index);
-  }, 4500);
-</script>
+  .swiper-pagination-bullet {
+    opacity: 1 !important;
+    background: rgba(255, 255, 255, 0.6) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: white !important;
+    transform: scale(1.4) !important;
+  }
+
+  /* Flechas más grandes y bonitas */
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 56px !important;
+    height: 56px !important;
+    background: #515151 !important;
+    border-radius: 50% !important;
+    backdrop-filter: blur(8px) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .swiper-button-next:hover,
+  .swiper-button-prev:hover {
+    background: #515151 !important;
+    transform: scale(1.1) !important;
+  }
+</style>
