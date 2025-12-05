@@ -1,5 +1,5 @@
 ---
-// components/HeroSlider.astro
+// components/HeroSlider.astro - 3D Circular Carousel (After Effects Style)
 const images = [
   "/assets/slides/slide-1.webp",
   "/assets/slides/slide-2.webp",
@@ -11,134 +11,364 @@ const images = [
 ];
 ---
 
-<div class="w-full max-w-5xl mx-auto">
-  <!-- Swiper Container -->
-  <div class="swiper heroSwiper rounded-3xl overflow-hidden shadow-sm">
-    <div class="swiper-wrapper">
+<div class="carousel-3d-container">
+  <div class="carousel-3d-wrapper">
+    <div class="carousel-3d" id="carousel3d">
       {
-        images.map((src) => (
-          <div class="swiper-slide">
-            <img
-              src={src}
-              alt="Slide"
-              class="w-full h-full object-contain"
-              loading="lazy"
-            />
+        images.map((src, index) => (
+          <div class="carousel-item" data-index={index}>
+            <img src={src} alt={`Slide ${index + 1}`} loading="lazy" />
           </div>
         ))
       }
     </div>
-
-    <!-- Navigation arrows -->
-    <div
-      class="swiper-button-next !text-white/80 hover:!text-white after:!text-4xl"
-    >
-    </div>
-    <div
-      class="swiper-button-prev !text-white/80 hover:!text-white after:!text-4xl"
-    >
-    </div>
-
-    <!-- Pagination dots -->
-    <div class="swiper-pagination !bottom-6"></div>
   </div>
+
+  <!-- Navigation Controls -->
+  <button class="carousel-nav carousel-prev" id="prevBtn">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+  </button>
+  <button class="carousel-nav carousel-next" id="nextBtn">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </button>
 </div>
 
-<!-- Swiper JS + Inicialización -->
 <script>
-  import Swiper from "swiper";
-  import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
-  import "swiper/css";
-  import "swiper/css/effect-fade";
-  import "swiper/css/navigation";
-  import "swiper/css/pagination";
+  class Carousel3D {
+    private carousel: HTMLElement;
+    private items: NodeListOf<HTMLElement>;
+    private currentIndex: number = 0;
+    private totalItems: number;
+    private radius: number = 500;
+    private autoplayInterval: number | null = null;
+    private isAnimating: boolean = false;
 
-  document.addEventListener("DOMContentLoaded", () => {
-    new Swiper(".heroSwiper", {
-      // Registrar módulos
-      modules: [Navigation, Pagination, Autoplay, EffectFade],
+    constructor(carouselId: string) {
+      this.carousel = document.getElementById(carouselId) as HTMLElement;
+      this.items = this.carousel.querySelectorAll(".carousel-item");
+      this.totalItems = this.items.length;
 
-      // Efecto fade (el más elegante para hero)
-      effect: "fade",
-      fadeEffect: {
-        crossFade: true,
-      },
+      this.init();
+      this.setupControls();
+      this.startAutoplay();
+      this.setupMouseInteraction();
+    }
 
-      // Autoplay
-      autoplay: {
-        delay: 4500,
-        disableOnInteraction: false,
-      },
+    init() {
+      // Position items in a circle
+      this.items.forEach((item, index) => {
+        this.updateItemPosition(item, index);
+      });
+    }
 
-      // Loop infinito
-      loop: true,
+    updateItemPosition(item: HTMLElement, index: number) {
+      const angle =
+        (index - this.currentIndex) * (360 / this.totalItems) * (Math.PI / 180);
+      const x = Math.sin(angle) * this.radius;
+      const z = Math.cos(angle) * this.radius - this.radius;
+      const rotateY = -((index - this.currentIndex) * (360 / this.totalItems));
 
-      // Velocidad de transición
-      speed: 1200,
+      item.style.transform = `
+        translateX(${x}px) 
+        translateZ(${z}px) 
+        rotateY(${rotateY}deg)
+      `;
 
-      // Paginación (puntos)
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-        bulletActiveClass: "bg-white",
-        bulletClass:
-          "inline-block w-3 h-3 rounded-full bg-black/60 mx-1.5 cursor-pointer transition-all",
-      },
+      // Calculate opacity and scale based on position
+      const distanceFromCenter = Math.abs(index - this.currentIndex);
+      const normalizedDistance = distanceFromCenter / (this.totalItems / 2);
+      const opacity = Math.max(0.3, 1 - normalizedDistance * 0.7);
 
-      // Navegación (flechas)
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
+      item.style.opacity = opacity.toString();
+      item.style.zIndex = (100 - Math.abs(z)).toString();
 
-      // Responsive
-      breakpoints: {
-        640: { slidesPerView: 1 },
-        768: { slidesPerView: 1 },
-        1024: { slidesPerView: 1 },
-      },
-    });
-  });
-</script>
+      // Add active class to center item
+      if (index === this.currentIndex) {
+        item.classList.add("active");
+      } else {
+        item.classList.remove("active");
+      }
+    }
 
-<style is:global>
-  /* Estilos personalizados para que quede brutal */
-  .heroSwiper {
-    aspect-ratio: 4 / 3;
-    max-height: 80vh;
-  }
+    rotate(direction: number) {
+      if (this.isAnimating) return;
+      this.isAnimating = true;
 
-  @media (min-width: 768px) {
-    .heroSwiper {
-      aspect-ratio: 16 / 10;
+      this.currentIndex =
+        (this.currentIndex + direction + this.totalItems) % this.totalItems;
+
+      this.items.forEach((item, index) => {
+        this.updateItemPosition(item, index);
+      });
+
+      setTimeout(() => {
+        this.isAnimating = false;
+      }, 600);
+    }
+
+    next() {
+      this.rotate(1);
+    }
+
+    prev() {
+      this.rotate(-1);
+    }
+
+    goToSlide(index: number) {
+      if (this.isAnimating || index === this.currentIndex) return;
+
+      const direction = index > this.currentIndex ? 1 : -1;
+      const steps = Math.abs(index - this.currentIndex);
+
+      for (let i = 0; i < steps; i++) {
+        setTimeout(() => this.rotate(direction), i * 100);
+      }
+    }
+
+    setupControls() {
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      prevBtn?.addEventListener("click", () => this.prev());
+      nextBtn?.addEventListener("click", () => this.next());
+
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") this.prev();
+        if (e.key === "ArrowRight") this.next();
+      });
+    }
+
+    startAutoplay() {
+      this.autoplayInterval = window.setInterval(() => {
+        this.next();
+      }, 4000);
+    }
+
+    stopAutoplay() {
+      if (this.autoplayInterval) {
+        clearInterval(this.autoplayInterval);
+        this.autoplayInterval = null;
+      }
+    }
+
+    setupMouseInteraction() {
+      const container = document.querySelector(
+        ".carousel-3d-container"
+      ) as HTMLElement;
+
+      container?.addEventListener("mouseenter", () => this.stopAutoplay());
+      container?.addEventListener("mouseleave", () => this.startAutoplay());
+
+      // Mouse drag to rotate
+      let isDragging = false;
+      let startX = 0;
+
+      container?.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        startX = e.clientX;
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        const deltaX = e.clientX - startX;
+        if (Math.abs(deltaX) > 50) {
+          if (deltaX > 0) {
+            this.prev();
+          } else {
+            this.next();
+          }
+          isDragging = false;
+        }
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
     }
   }
 
-  .swiper-pagination-bullet {
-    opacity: 1 !important;
-    background: rgba(255, 255, 255, 0.6) !important;
-    transition: all 0.3s ease !important;
+  // Initialize carousel when DOM is ready
+  document.addEventListener("DOMContentLoaded", () => {
+    new Carousel3D("carousel3d");
+  });
+</script>
+
+<style>
+  .carousel-3d-container {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 10px 10px 10px;
+    overflow: visible;
+    overflow-x: hidden;
   }
 
-  .swiper-pagination-bullet-active {
-    background: white !important;
-    transform: scale(1.4) !important;
+  /* Prevent body scroll */
+  body {
+    overflow-x: hidden;
   }
 
-  /* Flechas más grandes y bonitas */
-  .swiper-button-next,
-  .swiper-button-prev {
-    width: 56px !important;
-    height: 56px !important;
-    background: #515151 !important;
-    border-radius: 50% !important;
-    backdrop-filter: blur(8px) !important;
-    transition: all 0.3s ease !important;
+  .carousel-3d-wrapper {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    perspective: 1400px;
+    perspective-origin: 50% 50%;
+    overflow: visible !important;
   }
 
-  .swiper-button-next:hover,
-  .swiper-button-prev:hover {
-    background: #515151 !important;
-    transform: scale(1.1) !important;
+  .carousel-3d {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease;
+  }
+
+  .carousel-item {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 600px;
+    max-width: 85vw;
+    height: auto;
+    margin-left: -300px;
+    margin-top: -180px;
+    transform-style: preserve-3d;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    backface-visibility: visible;
+  }
+
+  .carousel-item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    border-radius: 20px;
+    background: transparent;
+    transition: all 0.4s ease;
+    display: block;
+    padding: 5px;
+  }
+
+  .carousel-item.active img {
+    background: rgba(255, 255, 255, 0.95);
+    transform: scale(1.05);
+  }
+
+  /* Navigation Buttons */
+  .carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 64px;
+    height: 64px;
+    background: #515151;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    /* box-shadow:
+      0 8px 32px rgba(59, 130, 246, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.1) inset; */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .carousel-nav:hover {
+    background: #616161;
+    transform: translateY(-50%) scale(1.1);
+    /* box-shadow:
+      0 12px 40px rgba(59, 130, 246, 0.7),
+      0 0 0 1px rgba(255, 255, 255, 0.2) inset; */
+  }
+
+  .carousel-nav:active {
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  .carousel-prev {
+    left: 40px;
+  }
+
+  .carousel-next {
+    right: 40px;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .carousel-3d-wrapper {
+      height: 350px;
+    }
+
+    .carousel-item {
+      width: 350px;
+      margin-left: -175px;
+      margin-top: -130px;
+    }
+
+    .carousel-nav {
+      width: 48px;
+      height: 48px;
+    }
+
+    .carousel-prev {
+      left: 10px;
+    }
+
+    .carousel-next {
+      right: 10px;
+    }
+
+    .carousel-3d-container {
+      padding: 10px 10px 10px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .carousel-3d-wrapper {
+      height: 280px;
+    }
+
+    .carousel-item {
+      width: 280px;
+      margin-left: -140px;
+      margin-top: -100px;
+    }
+
+    .carousel-nav {
+      width: 40px;
+      height: 40px;
+    }
+
+    .carousel-nav svg {
+      width: 18px;
+      height: 18px;
+    }
   }
 </style>
