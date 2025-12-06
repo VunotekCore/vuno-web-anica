@@ -274,7 +274,24 @@ const images = [
 
   .carousel-item.active img {
     background: rgba(255, 255, 255, 0.95);
+    opacity: 0.9;
     transform: scale(1.05);
+  }
+
+  /* 360° Rotation on hover for active image */
+  .carousel-item.active:hover img {
+    animation: rotate360 2.2s ease-in-out;
+  }
+
+  @keyframes rotate360 {
+    0% {
+      transform: scale(1.05) rotateY(0deg);
+      background: transparent;
+    }
+    100% {
+      transform: scale(1.05) rotateY(360deg);
+      background: transparent;
+    }
   }
 
   /* Navigation Buttons */
