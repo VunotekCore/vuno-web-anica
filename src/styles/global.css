@@ -4,4 +4,25 @@
     /* Configuración de fuentes personalizadas */
     --font-montserrat: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
     --font-lobster: 'Lobster', cursive;
+
+    /* Colores Corporativos Anica */
+    --color-primary: #F15A24;
+    --color-primary-light: #FF7A47;
+    --color-primary-dark: #D14A1A;
+
+    --color-secondary: #3EA530;
+    --color-secondary-light: #5BC24A;
+    --color-secondary-dark: #2E8523;
+
+    --color-accent: #67C2EC;
+    --color-accent-light: #8DD4F3;
+    --color-accent-dark: #4AA8D8;
+
+    --color-premium: #650E34;
+    --color-premium-light: #8A1447;
+    --color-premium-dark: #4A0A27;
+
+    --color-neutral: #333333;
+    --color-neutral-light: #515151;
+    --color-neutral-lighter: #6B6B6B;
 }

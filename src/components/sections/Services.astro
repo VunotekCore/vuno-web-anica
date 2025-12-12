@@ -1,0 +1,106 @@
+---
+import { services } from "../../utils/services.ts";
+
+type ServiceProps = {
+  title: string;
+  description: string;
+  icon: string;
+};
+---
+
+<section id="fortalezas" class="w-full py-16 md:py-24 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header con animación fade-in -->
+    <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 animate-fade-in">
+      <h2 class="text-3xl md:text-4xl font-bold text-neutral mb-4 font-lobster">
+        ¿Por Qué Elegirnos?
+      </h2>
+      <p class="text-lg text-neutral-light font-montserrat">
+        Somos tu socio estratégico en soluciones integrales, comprometidos con la excelencia y la innovación
+      </p>
+    </div>
+
+    <!-- Grid de Fortalezas con animaciones escalonadas -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      {
+        services.map((service: ServiceProps, index: number) => (
+          <div 
+            class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border-2 border-gray-100 hover:border-primary group animate-slide-up"
+            style={`animation-delay: ${index * 100}ms`}
+          >
+            <!-- Icon from sprite con animación y color corporativo -->
+            <div class="text-neutral-light group-hover:text-primary mb-4 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+              <svg class="w-12 h-12 animate-icon-bounce">
+                <use href={`/assets/sprite.svg#icon-${service.icon}`} />
+              </svg>
+            </div>
+            
+            <!-- Title con gradiente en hover -->
+            <h3 class="text-xl font-semibold text-neutral mb-3 font-lobster group-hover:text-primary transition-colors">
+              {service.title}
+            </h3>
+            
+            <!-- Description -->
+            <p class="text-neutral-light leading-relaxed font-montserrat">
+              {service.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Animación fade-in para el header */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out;
+  }
+
+  /* Animación slide-up para los cards */
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  /* Animación sutil de bounce para los iconos */
+  @keyframes icon-bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  .animate-icon-bounce {
+    animation: icon-bounce 2s ease-in-out infinite;
+  }
+
+  /* Pausar animación del icono al hacer hover en el card */
+  .group:hover .animate-icon-bounce {
+    animation-play-state: paused;
+  }
+</style>

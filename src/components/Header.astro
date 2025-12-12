@@ -1,60 +1,115 @@
-<nav class="w-full py-4">
-  <div class="max-w-screen-xl mx-auto px-4 flex items-center justify-between">
+<nav class="w-full py-2">
+  <div
+    class="max-w-screen-xl mx-auto px-4 flex items-center justify-between gap-2"
+  >
     <!-- Logo -->
     <div class="flex-shrink-0">
       <a href="/" class="flex items-center">
-        <svg class="h-14 md:h-28" viewBox="0 0 992.13 425.2" aria-hidden="true">
-          <use xlink:href="./assets/sprite.svg#anica-logo"></use>
+        <svg class="h-12 md:h-28" viewBox="0 0 992.13 425.2" aria-hidden="true">
+          <use xlink:href="/assets/sprite.svg#anica-logo"></use>
         </svg>
       </a>
     </div>
 
     <!-- Nav menu (Desktop) -->
     <ul
-      class="hidden md:flex items-center gap-10 text-2xl font-medium font-lobster"
+      class="hidden lg:flex items-center gap-4 xl:gap-8 text-lg xl:text-xl font-medium font-lobster"
     >
       <li>
-        <a href="#" class="hover:text-[#515151] transition">Quienes Somos</a>
+        <a href="/#quienes-somos" class="hover:text-primary transition"
+          >Quienes Somos</a
+        >
       </li>
       <li>
-        <a href="#" class="hover:text-[#515151] transition">Misión</a>
+        <a href="/#mision" class="hover:text-primary transition">Misión</a>
       </li>
-      <li><a href="#" class="hover:text-[#515151] transition">Visión</a></li>
-      <li><a href="#" class="hover:text-[#515151] transition">Valores</a></li>
+      <li>
+        <a href="/#vision" class="hover:text-primary transition">Visión</a>
+      </li>
+      <li>
+        <a href="/#valores" class="hover:text-primary transition">Valores</a>
+      </li>
     </ul>
 
     <!-- Services Row + Mobile Menu -->
-    <div class="flex items-center gap-6">
+    <div class="flex items-center gap-2">
       <!-- Cards (Desktop only) -->
-      <div class="hidden md:flex items-center gap-6">
-        <!-- Card -->
-        <div class="flex flex-col items-center text-center">
-          <img src="/services/serv-1.png" class="w-10 h-10 mb-1" />
-          <p class="text-[11px] font-medium leading-tight font-lobster">
-            Medios<br />Visuales
-          </p>
-        </div>
+      <div class="hidden md:flex items-center gap-2 lg:gap-3">
+        <!-- Card 1: Medios Visuales -->
+        <a
+          href="/servicios/medios-visuales"
+          class="flex flex-col items-center text-center relative hover:scale-105 transition-transform"
+        >
+          <div class="relative">
+            <img
+              src="/services/BtnMediosVisuales.svg"
+              class="w-20 h-20 lg:w-26 lg:h-26"
+              alt="Medios Visuales"
+            />
+            <p
+              class="absolute inset-0 flex items-center justify-center text-[14px] font-medium leading-tight font-lobster text-white pointer-events-none"
+            >
+              Medios<br />Visuales
+            </p>
+          </div>
+        </a>
 
-        <div class="flex flex-col items-center text-center">
-          <img src="/services/serv-2.png" class="w-10 h-10 mb-1" />
-          <p class="text-[11px] font-medium leading-tight font-lobster">
-            Diseño<br />3D
-          </p>
-        </div>
+        <!-- Card 2: Diseño 3D -->
+        <a
+          href="/servicios/diseno-3d"
+          class="flex flex-col items-center text-center relative hover:scale-105 transition-transform"
+        >
+          <div class="relative">
+            <img
+              src="/services/BtnDisenoGrafico.svg"
+              class="w-20 h-20 lg:w-26 lg:h-26"
+              alt="Diseño 3D"
+            />
+            <p
+              class="absolute inset-0 flex items-center justify-center text-[14px] font-medium leading-tight font-lobster text-white pointer-events-none"
+            >
+              Diseño<br />3D
+            </p>
+          </div>
+        </a>
 
-        <div class="flex flex-col items-center text-center">
-          <img src="/services/serv-3.png" class="w-10 h-10 mb-1" />
-          <p class="text-[11px] font-medium leading-tight font-lobster">
-            Web &<br />Programación
-          </p>
-        </div>
+        <!-- Card 3: Web & Programación -->
+        <a
+          href="/servicios/web-programacion"
+          class="flex flex-col items-center text-center relative hover:scale-105 transition-transform"
+        >
+          <div class="relative">
+            <img
+              src="/services/BtnWeb.svg"
+              class="w-20 h-20 lg:w-26 lg:h-26"
+              alt="Web & Programación"
+            />
+            <p
+              class="absolute inset-0 flex items-center justify-center text-[14px] font-medium leading-tight font-lobster text-white pointer-events-none"
+            >
+              Web &<br />Programación
+            </p>
+          </div>
+        </a>
 
-        <div class="flex flex-col items-center text-center">
-          <img src="/services/serv-4.png" class="w-10 h-10 mb-1" />
-          <p class="text-[11px] font-medium leading-tight font-lobster">
-            Muebles<br />Comerciales
-          </p>
-        </div>
+        <!-- Card 4: Muebles Comerciales -->
+        <a
+          href="/servicios/muebles-comerciales"
+          class="flex flex-col items-center text-center relative hover:scale-105 transition-transform"
+        >
+          <div class="relative">
+            <img
+              src="/services/BtnMueblesComerciales.svg"
+              class="w-20 h-20 lg:w-26 lg:h-26"
+              alt="Muebles Comerciales"
+            />
+            <p
+              class="absolute inset-0 flex items-center justify-center text-[14px] font-medium leading-tight font-lobster text-white pointer-events-none"
+            >
+              Muebles<br />Comerciales
+            </p>
+          </div>
+        </a>
       </div>
 
       <!-- Mobile Menu Icon -->
@@ -76,59 +131,31 @@
     </div>
   </div>
 
-  <!-- Mobile Menu Dropdown -->
+  <!-- Mobile Menu Dropdown (Navigation Only) -->
   <div id="mobile-menu" class="hidden md:hidden mt-4 px-4">
     <ul
       class="flex flex-col gap-4 text-lg font-medium font-lobster bg-white rounded-lg shadow-lg p-4"
     >
       <li>
-        <a href="#" class="block py-2 hover:text-[#515151] transition"
-          >Quienes Somos</a
+        <a
+          href="/#quienes-somos"
+          class="block py-2 hover:text-[#515151] transition">Quienes Somos</a
         >
       </li>
       <li>
-        <a href="#" class="block py-2 hover:text-[#515151] transition">Misión</a
+        <a href="/#mision" class="block py-2 hover:text-[#515151] transition"
+          >Misión</a
         >
       </li>
       <li>
-        <a href="#" class="block py-2 hover:text-[#515151] transition">Visión</a
+        <a href="/#vision" class="block py-2 hover:text-[#515151] transition"
+          >Visión</a
         >
       </li>
       <li>
-        <a href="#" class="block py-2 hover:text-[#515151] transition"
+        <a href="/#valores" class="block py-2 hover:text-[#515151] transition"
           >Valores</a
         >
-      </li>
-
-      <!-- Services in Mobile Menu -->
-      <li class="pt-4 border-t border-gray-200">
-        <p class="text-sm font-semibold mb-3 text-gray-600">Servicios</p>
-        <div class="grid grid-cols-2 gap-4">
-          <div class="flex flex-col items-center text-center">
-            <img src="/services/serv-1.png" class="w-10 h-10 mb-1" />
-            <p class="text-[11px] font-medium leading-tight">
-              Medios<br />Visuales
-            </p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="/services/serv-2.png" class="w-10 h-10 mb-1" />
-            <p class="text-[11px] font-medium leading-tight">
-              Diseño<br />3D
-            </p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="/services/serv-3.png" class="w-10 h-10 mb-1" />
-            <p class="text-[11px] font-medium leading-tight">
-              Web &<br />Programación
-            </p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="/services/serv-4.png" class="w-10 h-10 mb-1" />
-            <p class="text-[11px] font-medium leading-tight">
-              Muebles<br />Comerciales
-            </p>
-          </div>
-        </div>
       </li>
     </ul>
   </div>

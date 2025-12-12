@@ -5,10 +5,10 @@ import HeroSlider from "../components/HeroSlider.astro";
 <!-- components/Hero.astro -->
 <section
   class="w-full flex-shrink-0
-    min-h-screen
-    md:min-h-[calc(100vh-105px)]
+    min-h-[calc(100vh-64px)]
+    md:min-h-[calc(100vh-120px)]
     flex items-center justify-center
-    py-8 md:py-0"
+    py-4 md:py-0"
 >
   <div class="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
@@ -42,66 +42,106 @@ import HeroSlider from "../components/HeroSlider.astro";
           </div>
         </div>
 
-        <!-- WhatsApp Contact -->
-        <div class="fixed bottom-6 right-6 z-50 group">
-          <!-- Círculo flotante grande con efecto glassmorphism + pulse -->
+        <!-- Floating Contact Buttons -->
+        <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-4">
+          <!-- Email/Contact Button (arriba) -->
           <a
-            href="https://wa.me/50588555595?text=¡Hola!%20Vengo%20de%20tu%20web%20y%20me%20gustaría%20hablar%20contigo%20%F0%9F%98%8A"
-            target="_blank"
-            rel="noopener"
-            class="fixed bottom-5 right-5 z-50 group flex items-center justify-center
-         hover:scale-110 hover:shadow-xl
-         transition-all duration-500
-         border border-white/10
-         animate-float"
-            aria-label="Chatea por WhatsApp"
+            href="/contacto"
+            class="group flex items-center justify-center hover:scale-110 hover:shadow-xl transition-all duration-500 border border-white/10 animate-float"
+            style="animation-delay: 0.2s"
+            aria-label="Escríbenos por correo o agenda una cita"
           >
-            <!-- Icono WhatsApp en verde oficial #25D366 + sombra verde sutil -->
+            <!-- Icono de correo en naranja corporativo -->
             <svg
               width="36"
               height="36"
               class="w-7 h-7 md:w-16 md:h-16 drop-shadow-lg"
-              fill="#515151"
+              fill="#F15A24"
+              viewBox="0 0 24 24"
             >
-              <use xlink:href="./assets/sprite.svg#wp"></use>
+              <path
+                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+              ></path>
             </svg>
 
-            <!-- class="w-7 h-7 md:w-16 md:h-16 drop-shadow-lg" -->
-
-            <!-- Pulse estilo "online" como WhatsApp real -->
-            <span class="absolute -top-0.1 -right-0.1">
-              <!-- ← esta línea es la clave -->
+            <!-- Pulse indicator -->
+            <!-- <span class="absolute -top-0.1 -right-0.1">
               <span class="relative flex h-6 w-6">
                 <span
-                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ddd]"
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/50"
                 ></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-[#]"
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-primary"
+                ></span>
+              </span>
+            </span> -->
+
+            <!-- Tooltip -->
+            <span
+              class="absolute right-full mr-4 top-1/2 -translate-y-1/2
+                   px-4 py-2 bg-primary text-white text-sm rounded-2xl
+                   opacity-0 group-hover:opacity-100 pointer-events-none
+                   transition-opacity duration-300 whitespace-nowrap
+                   before:absolute before:left-full before:top-1/2 before:-translate-y-1/2
+                   before:border-8 before:border-transparent before:border-l-primary"
+            >
+              Escríbenos por correo o agenda una cita
+            </span>
+          </a>
+
+          <!-- WhatsApp Button (abajo) -->
+          <a
+            href="https://wa.me/50588555595?text=¡Hola!%20Vengo%20de%20tu%20web%20y%20me%20gustaría%20hablar%20contigo%20%F0%9F%98%8A"
+            target="_blank"
+            rel="noopener"
+            class="group flex items-center justify-center hover:scale-110 hover:shadow-xl transition-all duration-500 border border-white/10 animate-float"
+            aria-label="Chatea por WhatsApp"
+          >
+            <!-- Icono WhatsApp en verde corporativo -->
+            <svg
+              width="36"
+              height="36"
+              class="w-7 h-7 md:w-16 md:h-16 drop-shadow-lg"
+              fill="#3EA530"
+            >
+              <use xlink:href="/assets/sprite.svg#wp"></use>
+            </svg>
+
+            <!-- Pulse indicator -->
+            <span class="absolute -top-0.1 -right-0.5">
+              <span class="relative flex h-6 w-6">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary/50"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-secondary"
                 ></span>
               </span>
             </span>
 
-            <!-- Tooltip elegante al hacer hover (solo desktop) -->
+            <!-- Tooltip -->
             <span
               class="absolute right-full mr-4 top-1/2 -translate-y-1/2
-                   px-4 py-2 bg-[#515151] text-white text-sm rounded-2xl
+                   px-4 py-2 bg-secondary text-white text-sm rounded-2xl
                    opacity-0 group-hover:opacity-100 pointer-events-none
                    transition-opacity duration-300 whitespace-nowrap
                    before:absolute before:left-full before:top-1/2 before:-translate-y-1/2
-                   before:border-8 before:border-transparent before:border-l-[#515151]"
+                   before:border-8 before:border-transparent before:border-l-secondary"
             >
               ¡Hablemos por WhatsApp!
             </span>
           </a>
         </div>
 
-        <!-- Social icons -->
+        <!-- Social icons con animaciones -->
         <div
-          class="flex items-center gap-8 md:gap-12 pt-2 md:pt-4 mt-2 md:mt-3 font-montserrat"
+          class="flex items-center gap-8 md:gap-12 pt-2 md:pt-4 mt-2 md:mt-3 font-montserrat animate-social-fade"
         >
           <!-- Instagram -->
           <a
             href="#"
-            class="transition hover:text-heading-1 hover:scale-105"
+            class="transition hover:text-heading-1 hover:scale-110 transform hover:rotate-6 duration-300 animate-icon-pop"
+            style="animation-delay: 100ms"
             target="_blank"
             title="Estamos en instagram"
           >
@@ -111,7 +151,7 @@ import HeroSlider from "../components/HeroSlider.astro";
               class="md:w-[42px] md:h-[42px]"
               fill="#515151"
             >
-              <use xlink:href="./assets/sprite.svg#instagram"></use>
+              <use xlink:href="/assets/sprite.svg#instagram"></use>
             </svg>
             <span class="sr-only">social link</span>
           </a>
@@ -119,7 +159,8 @@ import HeroSlider from "../components/HeroSlider.astro";
           <!-- Facebook -->
           <a
             href="#"
-            class="transition hover:text-heading-1 hover:scale-105"
+            class="transition hover:text-heading-1 hover:scale-110 transform hover:rotate-6 duration-300 animate-icon-pop"
+            style="animation-delay: 200ms"
             target="_blank"
             title="Estamos en facebook"
           >
@@ -129,14 +170,16 @@ import HeroSlider from "../components/HeroSlider.astro";
               class="md:w-[42px] md:h-[42px]"
               fill="#515151"
             >
-              <use xlink:href="./assets/sprite.svg#fb"></use>
+              <use xlink:href="/assets/sprite.svg#fb"></use>
             </svg>
-            <span class="sr-only">Facebook Link</span>
+            <span class="sr-only">social link</span>
           </a>
-          <!-- Location -->
+
+          <!-- Ubicación -->
           <a
             href="#"
-            class="transition hover:text-heading-1 hover:scale-105"
+            class="transition hover:text-heading-1 hover:scale-110 transform hover:rotate-6 duration-300 animate-icon-pop"
+            style="animation-delay: 300ms"
             target="_blank"
             title="Nuestra ubicación"
           >
@@ -146,33 +189,92 @@ import HeroSlider from "../components/HeroSlider.astro";
               class="md:w-[42px] md:h-[42px]"
               fill="#515151"
             >
-              <use xlink:href="./assets/sprite.svg#location"></use>
+              <use xlink:href="/assets/sprite.svg#location"></use>
             </svg>
             <span class="sr-only">social link</span>
           </a>
         </div>
-        <div
-          class="flex items-center gap-3 pt-4 text-[#515151] hover:text-heading-1 transition cursor-pointer font-montserrat"
-        >
-          <a
-            href="mailto:info@anicasolucionesintegrales.com"
-            class="pt-4 px-5 py-3 transition text-[#515151] text-2xl flex items-center gap-3"
+        <!-- Badge de Experiencia -->
+        <div class="flex items-center gap-3 pt-4 animate-badge-slide">
+          <div
+            class="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-[#515151] to-gray-700 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
           >
             <svg
-              width="20"
-              height="20"
+              width="32"
+              height="32"
               fill="none"
-              stroke="#515151"
-              stroke-width="1.5"
-              class="text-gray-700"
+              stroke="#ffffff"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              class="animate-pulse"
             >
-              <path d="M2 4l8 6 8-6M2 4h16v12H2z"></path>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
             </svg>
-
-            <span class="font-medium">Contactanos por correo</span>
-          </a>
+            <div class="text-white">
+              <p class="text-sm font-medium opacity-90">
+                Experiencia Comprobada
+              </p>
+              <p class="text-2xl font-bold font-lobster">6+ Años</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  /* Animación fade-in para iconos sociales */
+  @keyframes social-fade {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-social-fade {
+    animation: social-fade 0.8s ease-out;
+  }
+
+  /* Animación pop para cada icono social */
+  @keyframes icon-pop {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-icon-pop {
+    animation: icon-pop 0.5s ease-out forwards;
+    opacity: 0;
+  }
+
+  /* Animación slide para el badge de experiencia */
+  @keyframes badge-slide {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-badge-slide {
+    animation: badge-slide 0.8s ease-out 0.4s forwards;
+    opacity: 0;
+  }
+</style>
