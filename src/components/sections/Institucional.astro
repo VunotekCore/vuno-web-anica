@@ -1,0 +1,239 @@
+---
+import QuienesSomos from "./QuienesSomos.astro";
+import Mision from "./Mision.astro";
+import Vision from "./Vision.astro";
+import NuestrosValores from "./NuestrosValores.astro";
+
+const sections = [
+    {
+        id: "quienes-somos",
+        title: "¿Quiénes Somos?",
+        preview:
+            "Anica Soluciones Integrales, pequeña empresa PYME con seis años en el mercado nacional...",
+        component: QuienesSomos,
+    },
+    {
+        id: "mision",
+        title: "Misión",
+        preview:
+            "Ser el socio estratégico de nuestros clientes, brindando soluciones integrales y personalizadas...",
+        component: Mision,
+    },
+    {
+        id: "vision",
+        title: "Visión",
+        preview:
+            "Consolidarnos como la empresa líder a nivel nacional en la creación de soluciones personalizadas...",
+        component: Vision,
+    },
+    {
+        id: "valores",
+        title: "Nuestros Valores",
+        preview:
+            "Amor a Dios, Excelencia, Innovación, Compromiso, Integridad y Versatilidad...",
+        component: NuestrosValores,
+    },
+];
+---
+
+<section class="w-full py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Grid de 2x2 con animaciones -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            {
+                sections.map((section, index) => (
+                    <div
+                        id={section.id}
+                        class="scroll-mt-32 animate-card-appear"
+                        style={`animation-delay: ${index * 150}ms`}
+                    >
+                        <button
+                            data-modal-target={section.id}
+                            class="w-full bg-gradient-to-br from-gray-50 to-white rounded-xl p-8 h-full border-2 border-gray-200 hover:border-primary hover:shadow-xl transition-all duration-300 text-left cursor-pointer group transform hover:-translate-y-1"
+                        >
+                            <h3 class="text-2xl md:text-3xl font-bold text-neutral mb-4 font-lobster group-hover:text-primary transition-colors">
+                                {section.title}
+                            </h3>
+                            <p class="text-neutral-light leading-relaxed font-montserrat line-clamp-3">
+                                {section.preview}
+                            </p>
+                            <p class="text-primary font-medium mt-4 font-montserrat flex items-center gap-2 group-hover:gap-3 transition-all">
+                                Leer más
+                                <svg
+                                    class="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M9 5l7 7-7 7"
+                                    />
+                                </svg>
+                            </p>
+                        </button>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+
+    <!-- Modals con animaciones -->
+    {
+        sections.map((section) => {
+            const Component = section.component;
+            return (
+                <div
+                    id={`modal-${section.id}`}
+                    class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4 animate-modal-fade"
+                    data-modal={section.id}
+                >
+                    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-modal-slide">
+                        <div class="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center">
+                            <h3 class="text-2xl md:text-3xl font-bold text-primary font-lobster">
+                                {section.title}
+                            </h3>
+                            <button
+                                data-modal-close={section.id}
+                                class="text-neutral-light hover:text-primary transition-all p-2 hover:rotate-90 duration-300"
+                                aria-label="Cerrar"
+                            >
+                                <svg
+                                    class="w-6 h-6"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="px-6 py-8 text-neutral-light leading-relaxed font-montserrat">
+                            <Component />
+                        </div>
+                    </div>
+                </div>
+            );
+        })
+    }
+</section>
+
+<script>
+    // Modal functionality
+    document.addEventListener("DOMContentLoaded", () => {
+        const modalTriggers = document.querySelectorAll("[data-modal-target]");
+        const modalCloses = document.querySelectorAll("[data-modal-close]");
+        const modals = document.querySelectorAll("[data-modal]");
+
+        // Open modal
+        modalTriggers.forEach((trigger) => {
+            trigger.addEventListener("click", () => {
+                const targetId = trigger.getAttribute("data-modal-target");
+                const modal = document.getElementById(`modal-${targetId}`);
+                if (modal) {
+                    modal.classList.remove("hidden");
+                    modal.classList.add("flex");
+                    document.body.style.overflow = "hidden";
+                }
+            });
+        });
+
+        // Close modal
+        modalCloses.forEach((closeBtn) => {
+            closeBtn.addEventListener("click", () => {
+                const targetId = closeBtn.getAttribute("data-modal-close");
+                const modal = document.getElementById(`modal-${targetId}`);
+                if (modal) {
+                    modal.classList.add("hidden");
+                    modal.classList.remove("flex");
+                    document.body.style.overflow = "";
+                }
+            });
+        });
+
+        // Close on backdrop click
+        modals.forEach((modal) => {
+            modal.addEventListener("click", (e) => {
+                if (e.target === modal) {
+                    modal.classList.add("hidden");
+                    modal.classList.remove("flex");
+                    document.body.style.overflow = "";
+                }
+            });
+        });
+
+        // Close on Escape key
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                modals.forEach((modal) => {
+                    modal.classList.add("hidden");
+                    modal.classList.remove("flex");
+                });
+                document.body.style.overflow = "";
+            }
+        });
+    });
+</script>
+
+<style>
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Animación de aparición de cards */
+    @keyframes card-appear {
+        from {
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+
+    .animate-card-appear {
+        animation: card-appear 0.6s ease-out forwards;
+        opacity: 0;
+    }
+
+    /* Animación de fade para el backdrop del modal */
+    @keyframes modal-fade {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .animate-modal-fade {
+        animation: modal-fade 0.3s ease-out;
+    }
+
+    /* Animación de slide para el contenido del modal */
+    @keyframes modal-slide {
+        from {
+            transform: translateY(-50px) scale(0.95);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+    }
+
+    .animate-modal-slide {
+        animation: modal-slide 0.4s ease-out;
+    }
+</style>

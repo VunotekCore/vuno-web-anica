@@ -1,0 +1,47 @@
+---
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+import Header from "../../components/Header.astro";
+---
+
+<DefaultLayout>
+    <Header />
+
+    <main class="w-full">
+        <!-- Hero Section -->
+        <section
+            class="w-full py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white"
+        >
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h1
+                        class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-lobster"
+                    >
+                        Web & Programación
+                    </h1>
+                    <p
+                        class="text-xl text-gray-600 font-montserrat max-w-3xl mx-auto"
+                    >
+                        Desarrollamos soluciones digitales personalizadas para
+                        impulsar tu presencia online
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="w-full py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="prose prose-lg max-w-none">
+                    <h2
+                        class="text-3xl font-bold text-gray-900 mb-6 font-lobster"
+                    >
+                        Nuestros Servicios
+                    </h2>
+                    <p class="text-gray-700 font-montserrat mb-8">
+                        Contenido próximamente...
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+</DefaultLayout>
