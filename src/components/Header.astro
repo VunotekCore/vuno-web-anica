@@ -3,7 +3,7 @@
     <!-- Logo -->
     <div class="flex-shrink-0">
       <a href="/" class="flex items-center">
-        <svg class="h-12 w-auto md:h-16" aria-hidden="true">
+        <svg class="h-14 md:h-28" viewBox="0 0 992.13 425.2" aria-hidden="true">
           <use xlink:href="./assets/sprite.svg#anica-logo"></use>
         </svg>
       </a>
@@ -58,7 +58,11 @@
       </div>
 
       <!-- Mobile Menu Icon -->
-      <button class="md:hidden">
+      <button
+        id="mobile-menu-button"
+        class="md:hidden p-2"
+        aria-label="Toggle menu"
+      >
         <svg
           width="28"
           height="28"
@@ -71,4 +75,82 @@
       </button>
     </div>
   </div>
+
+  <!-- Mobile Menu Dropdown -->
+  <div id="mobile-menu" class="hidden md:hidden mt-4 px-4">
+    <ul
+      class="flex flex-col gap-4 text-lg font-medium font-lobster bg-white rounded-lg shadow-lg p-4"
+    >
+      <li>
+        <a href="#" class="block py-2 hover:text-[#515151] transition"
+          >Quienes Somos</a
+        >
+      </li>
+      <li>
+        <a href="#" class="block py-2 hover:text-[#515151] transition">Misión</a
+        >
+      </li>
+      <li>
+        <a href="#" class="block py-2 hover:text-[#515151] transition">Visión</a
+        >
+      </li>
+      <li>
+        <a href="#" class="block py-2 hover:text-[#515151] transition"
+          >Valores</a
+        >
+      </li>
+
+      <!-- Services in Mobile Menu -->
+      <li class="pt-4 border-t border-gray-200">
+        <p class="text-sm font-semibold mb-3 text-gray-600">Servicios</p>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="flex flex-col items-center text-center">
+            <img src="/services/serv-1.png" class="w-10 h-10 mb-1" />
+            <p class="text-[11px] font-medium leading-tight">
+              Medios<br />Visuales
+            </p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="/services/serv-2.png" class="w-10 h-10 mb-1" />
+            <p class="text-[11px] font-medium leading-tight">
+              Diseño<br />3D
+            </p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="/services/serv-3.png" class="w-10 h-10 mb-1" />
+            <p class="text-[11px] font-medium leading-tight">
+              Web &<br />Programación
+            </p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="/services/serv-4.png" class="w-10 h-10 mb-1" />
+            <p class="text-[11px] font-medium leading-tight">
+              Muebles<br />Comerciales
+            </p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
 </nav>
+
+<script>
+  const menuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  if (menuButton && mobileMenu) {
+    menuButton.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (
+        !menuButton.contains(e.target as Node) &&
+        !mobileMenu.contains(e.target as Node)
+      ) {
+        mobileMenu.classList.add("hidden");
+      }
+    });
+  }
+</script>
