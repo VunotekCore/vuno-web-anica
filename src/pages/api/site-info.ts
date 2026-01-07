@@ -44,8 +44,8 @@ export const GET: APIRoute = async () => {
                 const fallbackData = {
                     logo_url: null,
                     site: {
-                        name: "ANICA Soluciones Integrales",
-                        description: "",
+                        name: "ANICA Soluciones Integrales - Proxy",
+                        description: "Proxy",
                         url: "https://anicasolucionesintegrales.com",
                         home: "https://anicasolucionesintegrales.com",
                         language: "es",
