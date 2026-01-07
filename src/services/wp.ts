@@ -1,35 +1,24 @@
-const domain = import.meta.env.WP_DOMAIN
+const domain = import.meta.env.WP_DOMAIN || 'https://anicasolucionesintegrales.com'
 const apiUrl = `${domain}/wp-json/wp/v2`
 const apiUrlInfo = `${domain}/wp-json/custom/v1`
 
 export const getSiteInfo = async () => {
+    let response: Response
+
     try {
-        // Detectar si estamos en el servidor o en el cliente
-        const isServer = typeof window === 'undefined'
-
-        let proxyUrl: string
-        if (isServer) {
-            // En el servidor, usar URL absoluta
-            const baseUrl = import.meta.env.SITE || 'http://localhost:4321'
-            proxyUrl = `${baseUrl}/api/site-info`
-        } else {
-            // En el cliente, usar URL relativa
-            proxyUrl = '/api/site-info'
-        }
-
-        const response = await fetch(proxyUrl)
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch site info: ${response.status} ${response.statusText}`)
-        }
-
-        const data = await response.json()
-        return data
-
+        console.log(domain)
+        console.log(apiUrlInfo)
+        response = await fetch(`${apiUrlInfo}/site-info`)
     } catch (error) {
         console.error('getSiteInfo error:', error)
         throw error
     }
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch site information')
+    }
+
+    return response.json()
 }
 
 // // https://anicasolucionesintegrales.com/wp-json/custom/v1/site-info
