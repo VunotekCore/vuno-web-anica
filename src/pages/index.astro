@@ -6,7 +6,8 @@ import Services from "../components/sections/Services.astro";
 import Institucional from "../components/sections/Institucional.astro";
 import { getPageInfo, getSiteInfo } from "../services/wp";
 
-console.log("informacion del sitio", await getSiteInfo());
+const siteInfo = await getSiteInfo();
+console.log("informacion del sitio", siteInfo);
 // const { title, content } = await getPageInfo("sample-page");
 ---
 
@@ -15,4 +16,5 @@ console.log("informacion del sitio", await getSiteInfo());
   <Hero />
   <Services />
   <Institucional />
+  <span>{siteInfo?.site?.name}</span>
 </DefaultLayout>
