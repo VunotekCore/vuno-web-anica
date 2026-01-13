@@ -1,0 +1,15 @@
+{
+    "name": "the-real-devs/contact-form",
+    "description": "Contact form with email and calendar integration",
+    "type": "project",
+    "require": {
+        "php": ">=7.4",
+        "phpmailer/phpmailer": "^6.9",
+        "google/apiclient": "^2.15"
+    },
+    "config": {
+        "platform": {
+            "php": "7.4"
+        }
+    }
+}
