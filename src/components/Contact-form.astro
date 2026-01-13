@@ -3,7 +3,7 @@
 ---
 
 <section class="mx-auto max-w-4xl">
-    <div class="rounded-lg border-2 border-primary/30 bg-gray-50 p-8 shadow-xl">
+    <div class="rounded-lg border-2 border-primary/30 bg-gray-50 p-2 shadow-xl">
         <!-- Form Type Selector -->
         <div class="mb-8 flex gap-4">
             <button
@@ -103,14 +103,19 @@
                         class="w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-3 text-neutral transition-colors focus:border-primary focus:outline-none"
                     >
                         <option value="">Seleccione una opción</option>
-                        <option value="web">Desarrollo Web</option>
-                        <option value="mobile">Aplicación Móvil</option>
-                        <option value="enterprise">Sistema Empresarial</option>
-                        <option value="salesforce"
-                            >Integración Salesforce</option
+                        <option value="medios_visuales"
+                            >Medios Visuales & Promocionales</option
                         >
-                        <option value="ecommerce">E-commerce</option>
-                        <option value="other">Otro</option>
+                        <option value="modelado_3d"
+                            >Modelado 3D & Renderizado</option
+                        >
+                        <option value="web_aplicaciones"
+                            >Web & Aplicaciones</option
+                        >
+                        <option value="muebles_comerciales"
+                            >Muebles Comerciales & Hogar</option
+                        >
+                        <option value="otro">Otro</option>
                     </select>
                 </div>
 
@@ -124,10 +129,10 @@
                         class="w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-3 text-neutral transition-colors focus:border-primary focus:outline-none"
                     >
                         <option value="">Seleccione un rango</option>
+                        <option value="1k-5k">$1,000 - $5,000</option>
                         <option value="5k-10k">$5,000 - $10,000</option>
-                        <option value="10k-25k">$10,000 - $25,000</option>
-                        <option value="25k-50k">$25,000 - $50,000</option>
-                        <option value="50k+">$50,000+</option>
+                        <option value="10k-15k">$10,000 - $15,000</option>
+                        <option value="15k+">$15,000+</option>
                     </select>
                 </div>
 
@@ -326,27 +331,122 @@
         // Form submission
         const form = document.getElementById("contact-form");
         const successMessage = document.getElementById("success-message");
+        const submitButton = form?.querySelector('button[type="submit"]');
 
         form?.addEventListener("submit", async (e) => {
             e.preventDefault();
 
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
+            // deshabilitar boton durante  el envio
+            if (submitButton) {
+                submitButton.disable /= true;
+                const originalText = submitText?.textContent;
+                if (submitText) {
+                    submitText.textContent = "Enviando...";
+                }
+            }
 
-            // Here you would normally send to a backend API
-            console.log("Form data:", data);
+            try {
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
 
-            // Show success message
-            form.classList.add("hidden");
-            successMessage?.classList.remove("hidden");
+                const apiBaseUrl =
+                    window.location.hostname === "localhost"
+                        ? "http://localhost:8000"
+                        : "https://anicasolucionesintegrales.com";
 
-            // Reset form after 3 seconds
-            setTimeout(() => {
-                form.reset();
-                form.classList.remove("hidden");
-                successMessage?.classList.add("hidden");
-                switchToQuote(); // Reset to default
-            }, 3000);
+                const emailResponse = await fetch(
+                    `${apiBaseUrl}/api/send-email.php`,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data),
+                    },
+                );
+
+                const emailResult = await emailResponse.json();
+
+                if (!emailResult.success) {
+                    throw new Error(
+                        emailResult.message || "Error al enviar el mensaje",
+                    );
+                }
+
+                // si es una reuninon tambien se crea el evento en calendario
+                if (data.formType === "agendar") {
+                    try {
+                        const calendarResponse = await fetch(
+                            `${apiBaseUrl}/api/calendar-handler.php`,
+                            {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify(data),
+                            },
+                        );
+                        const calendarResult = await calendarResponse.json();
+
+                        if (calendarResult.success) {
+                            console.log(
+                                "Evento de calendario creado:",
+                                calendarResult.event,
+                            );
+                        } else {
+                            console.warn(
+                                "No se pudo crear el evento de calendario",
+                                calendarResult.message,
+                            );
+                        }
+                        // no se lanza error el email si se envia
+                    } catch (calendarError) {
+                        console.warn(
+                            "Error al crear el evento de calendario",
+                            calendarError,
+                        );
+                    }
+                }
+                // mostrar mensaje de exito
+                form.classList.add("hidden");
+                successMessage?.classList.remove("hidden");
+
+                // resetear el formulario despues de 5 segundos
+                setTimeout(() => {
+                    form.reset();
+                    form.classList.remove("hidden");
+                    successMessage?.classList.add("hidden");
+                    switchToQuote(); // reset to defaullt
+
+                    // rehabilitar boton
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        if (submitText) {
+                            submitText.textContent = "Enviar Cotización";
+                        }
+                    }
+                }, 5000);
+            } catch (error) {
+                console.error("Error al enviar el formulario:", error);
+                // mostrar mensaje de error al usuario
+                alert(
+                    "Error al enviar formulario: " +
+                        error.message +
+                        "\n\nPor favor intenta nuevamente o contactanos directamente.",
+                );
+
+                // Rehabilitar boton
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    const formType = formTypeInput?.value || "Cotizar";
+                    if (submitText) {
+                        submitText.textContent =
+                            formType === "Agendar"
+                                ? "Agendar Reunión"
+                                : "Enviar Cotización";
+                    }
+                }
+            }
         });
     }
 
