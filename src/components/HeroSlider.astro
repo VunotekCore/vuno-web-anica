@@ -1,23 +1,27 @@
 ---
-// components/HeroSlider.astro - 3D Circular Carousel (After Effects Style)
-const images = [
-  "/assets/slides/slide-1.webp",
-  "/assets/slides/slide-2.webp",
-  "/assets/slides/slide-3.webp",
-  "/assets/slides/slide-4.webp",
-  "/assets/slides/slide-5.webp",
-  "/assets/slides/slide-6.webp",
-  "/assets/slides/slide-7.webp",
-];
+import { getSliderFromImageKit } from "../services/wp";
+
+type Slide = {
+  url: string;
+  name: string;
+};
+
+const slidesIMG: Slide[] = (await getSliderFromImageKit())
+  .map(({ url, name }: { url: string; name: string }) => ({ url, name }))
+  .sort((a: { name: string }, b: { name: string }) =>
+    a.name.localeCompare(b.name),
+  );
+
+console.log("resultado final ->  ", slidesIMG);
 ---
 
 <div class="carousel-3d-container">
   <div class="carousel-3d-wrapper">
     <div class="carousel-3d" id="carousel3d">
       {
-        images.map((src, index) => (
+        slidesIMG.map((slide: { url: string; name: string }, index: number) => (
           <div class="carousel-item" data-index={index}>
-            <img src={src} alt={`Slide ${index + 1}`} loading="lazy" />
+            <img src={slide.url} alt={slide.name} loading="lazy" />
           </div>
         ))
       }
@@ -172,7 +176,7 @@ const images = [
 
     setupMouseInteraction() {
       const container = document.querySelector(
-        ".carousel-3d-container"
+        ".carousel-3d-container",
       ) as HTMLElement;
 
       container?.addEventListener("mouseenter", () => this.stopAutoplay());
@@ -389,3 +393,5 @@ const images = [
     }
   }
 </style>
+
+``

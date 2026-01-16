@@ -1,3 +1,24 @@
+---
+const menuServices = {
+  mediosVisuales: {
+    title: "Medios Visuales",
+    href: "https://ik.imagekit.io/IV7VRclcnk/services-menu/BtnMediosVisuales.svg?updatedAt=1768317730994",
+  },
+  diseno3d: {
+    title: "Diseño 3D",
+    href: "https://ik.imagekit.io/IV7VRclcnk/services-menu/BtnDisenoGrafico.svg?updatedAt=1768317730618",
+  },
+  webProgramacion: {
+    title: "Web & Programación",
+    href: "https://ik.imagekit.io/IV7VRclcnk/services-menu/BtnWeb.svg?updatedAt=1768317730035",
+  },
+  mueblesComerciales: {
+    title: "Muebles Comerciales",
+    href: "https://ik.imagekit.io/IV7VRclcnk/services-menu/BtnMueblesComerciales.svg?updatedAt=1768317728640",
+  },
+};
+---
+
 <nav class="w-full py-2">
   <div
     class="max-w-screen-xl mx-auto px-4 flex items-center justify-between gap-2"
@@ -42,7 +63,7 @@
         >
           <div class="relative">
             <img
-              src="/services/BtnMediosVisuales.svg"
+              src={menuServices.mediosVisuales.href}
               class="w-20 h-20 lg:w-26 lg:h-26"
               alt="Medios Visuales"
             />
@@ -61,7 +82,7 @@
         >
           <div class="relative">
             <img
-              src="/services/BtnDisenoGrafico.svg"
+              src={menuServices.diseno3d.href}
               class="w-20 h-20 lg:w-26 lg:h-26"
               alt="Diseño 3D"
             />
@@ -80,7 +101,7 @@
         >
           <div class="relative">
             <img
-              src="/services/BtnWeb.svg"
+              src={menuServices.webProgramacion.href}
               class="w-20 h-20 lg:w-26 lg:h-26"
               alt="Web & Programación"
             />
@@ -99,7 +120,7 @@
         >
           <div class="relative">
             <img
-              src="/services/BtnMueblesComerciales.svg"
+              src={menuServices.mueblesComerciales.href}
               class="w-20 h-20 lg:w-26 lg:h-26"
               alt="Muebles Comerciales"
             />

@@ -1,3 +1,5 @@
+import { bufferHeadContent } from "astro/runtime/server/render/astro/render.js"
+
 const domain = import.meta.env.WP_DOMAIN || 'https://anicasolucionesintegrales.com'
 const apiUrl = `${domain}/wp-json/wp/v2`
 const apiUrlInfo = `${domain}/wp-json/custom/v1`
@@ -46,4 +48,34 @@ export const getPageInfo = async (slug: string) => {
     console.log('content', content)
 
     return { title, content }
+}
+
+//  obtener fotos de imagekit.io
+export const getSliderFromImageKit = async () => {
+    const urlImagekit = import.meta.env.URL_IMAGEKIT
+    const privateKey = import.meta.env.PRIVATE_KEY
+    const auth = Buffer.from(`${privateKey}:`).toString('base64');
+
+    const options = {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Basic ${auth}`,
+        },
+    };
+
+    try {
+        const response = await fetch(urlImagekit, options);
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
+
 }

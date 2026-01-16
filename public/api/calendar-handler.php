@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Cargar Google API Client
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 try {
     // Obtener datos del formulario
