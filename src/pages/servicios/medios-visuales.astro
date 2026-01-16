@@ -1,45 +1,248 @@
 ---
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
 import Header from "../../components/Header.astro";
+
+const productosIMG = [
+    {
+        id: 1,
+        name: "Letras corpóreas en PVC, acrílico y metal",
+        short: "Letras de caja iluminadas",
+        image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/Letras%20pvc%20caja.webp?updatedAt=1768519835671",
+    },
+    {
+        id: 2,
+        name: "SIDEKICK MDF, PVC, COROPLAT 8mm",
+        short: "Sidekick publicitario",
+        image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/8.webp?updatedAt=1768519835545",
+    },
+    {
+        id: 3,
+        name: "SIDEKICK MDF, PVC, COROPLAT 8mm",
+        short: "Sidekick publicitario",
+        image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/7.webp?updatedAt=1768519835454",
+    },
+    {
+        id: 4,
+        name: "EXHIBIDOR PVC",
+        short: "Exhibidor de mostrador",
+        image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/9.webp?updatedAt=1768519835619",
+    },
+    {
+        id: 5,
+        name: "STAND PERSONALIZADO",
+        short: "Stand de piso a medida",
+        image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/Stand.webp?updatedAt=1768519835925",
+    },
+    {
+        id: 6,
+        name: "RÓTULOS PVC",
+        short: "Señalética y rótulos",
+        image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/Se%C3%B1al%C3%A9tica.webp?updatedAt=1768519836008",
+    },
+    {
+        id: 7,
+        name: "VINIL IMPRESO Y STICKERS",
+        short: "Viniles y stickers personalizados",
+        image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/Stickers.webp?updatedAt=1768519835861",
+    },
+    {
+        id: 8,
+        name: "Sublimación y transfer (tazas, textiles, termos, llaveros, lapiceros, lanyards, DTF)",
+        short: "Productos promocionales sublimados",
+        image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/Promocionales.webp?updatedAt=1768519835797",
+    },
+    {
+        id: 9,
+        name: "Rotulación vehicular completa o parcial • Banners y lonas • Microperforado y vinil reflectivo",
+        short: "Rotulación vehicular y gran formato",
+        image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/Rotulacion%20vehicular.webp?updatedAt=1768519835851",
+    },
+    {
+        id: 10,
+        name: "Roll-ups y displays portátiles",
+        short: "Displays portátiles y roll-ups",
+        image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/21.webp?updatedAt=1768519835800",
+    },
+];
 ---
 
 <DefaultLayout>
     <Header />
 
     <main class="w-full">
-        <!-- Hero Section -->
+        <!-- Hero -->
         <section
-            class="w-full py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white"
+            class="w-full py-16 md:py-24 bg-gradient-to-br from-primary/5 to-white"
         >
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
                     <h1
-                        class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-lobster"
+                        class="text-4xl md:text-6xl font-bold text-neutral mb-4"
                     >
-                        Medios Visuales
+                        <span class="font-lobster">Medios Visuales</span>
+                        <span class="text-primary text-5xl md:text-7xl">&</span>
+                        <span
+                            class="font-lobster text-3xl md:text-5xl text-primary-dark italic"
+                            >Promocionales</span
+                        >
                     </h1>
                     <p
-                        class="text-xl text-gray-600 font-montserrat max-w-3xl mx-auto"
+                        class="text-lg md:text-xl text-neutral-light font-montserrat max-w-4xl mx-auto leading-relaxed"
                     >
-                        Transformamos tus ideas en impacto visual con soluciones
-                        creativas de alta calidad
+                        Herramientas visuales potentes que comunican tu marca
+                        con impacto y generan conexión real con tu audiencia a
+                        través de elementos físicos memorables.
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- Content Section -->
-        <section class="w-full py-16 bg-white">
+        <!-- Contenido principal -->
+        <section class="w-full py-16 md:py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="prose prose-lg max-w-none">
+                <!-- Rotulación comercial & señalética -->
+                <div class="mb-20">
                     <h2
-                        class="text-3xl font-bold text-gray-900 mb-6 font-lobster"
+                        class="text-3xl md:text-4xl font-bold text-neutral mb-8 font-lobster text-center md:text-left"
                     >
-                        Nuestros Servicios
+                        Rotulación comercial y señalética
                     </h2>
-                    <p class="text-gray-700 font-montserrat mb-8">
-                        Contenido próximamente...
+                    <div
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+                    >
+                        {
+                            productosIMG.slice(0, 7).map((prod) => (
+                                <div class="group bg-gray-50/50 rounded-xl overflow-hidden border border-gray-200 hover:border-primary/60 hover:shadow-xl transition-all duration-300">
+                                    <div class="relative aspect-square bg-gradient-to-br from-primary/5 to-secondary/5">
+                                        <img
+                                            src={prod.image}
+                                            class="absolute inset-0 w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-105"
+                                            alt={prod.name}
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                    <div class="p-5 text-center">
+                                        <p class="font-montserrat font-semibold text-neutral text-lg">
+                                            {prod.short || prod.name}
+                                        </p>
+                                        <p class="text-sm text-neutral-light mt-1 line-clamp-2">
+                                            {prod.name}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+
+                <!-- Promocionales & impresión especial -->
+                <div class="mb-20">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-neutral mb-8 font-lobster text-center md:text-left"
+                    >
+                        Impresión promocional y productos personalizados
+                    </h2>
+                    <div
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+                    >
+                        {
+                            productosIMG.slice(7, 10).map((prod) => (
+                                <div class="group bg-gray-50/50 rounded-xl overflow-hidden border border-gray-200 hover:border-primary/60 hover:shadow-xl transition-all duration-300">
+                                    <div class="relative aspect-square bg-gradient-to-br from-primary/5 to-secondary/5">
+                                        <img
+                                            src={prod.image}
+                                            class="absolute inset-0 w-full h-full object-contain p-8 md:p-10 transition-transform duration-500 group-hover:scale-105"
+                                            alt={prod.name}
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                    <div class="p-5 text-center">
+                                        <p class="font-montserrat font-semibold text-neutral text-lg">
+                                            {prod.short}
+                                        </p>
+                                        <p class="text-sm text-neutral-light mt-1">
+                                            {prod.name}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+
+                <!-- Servicios adicionales (sin imagen principal) -->
+                <div class="grid md:grid-cols-2 gap-10 mb-20">
+                    <div
+                        class="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl p-8 md:p-10 border border-primary/10"
+                    >
+                        <h3
+                            class="text-2xl font-bold text-neutral mb-6 font-lobster"
+                        >
+                            Grabado y corte láser
+                        </h3>
+                        <ul
+                            class="space-y-4 text-neutral-light font-montserrat"
+                        >
+                            <li class="flex items-start">
+                                <span class="text-primary text-xl mr-3">★</span>
+                                Grabado fino en madera, acrílico, metal, cuero y más
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary text-xl mr-3">★</span>
+                                Corte de precisión para piezas personalizadas y prototipos
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div
+                        class="bg-gradient-to-br from-secondary/5 to-accent/5 rounded-2xl p-8 md:p-10 border border-secondary/10"
+                    >
+                        <h3
+                            class="text-2xl font-bold text-neutral mb-6 font-lobster"
+                        >
+                            Otras soluciones
+                        </h3>
+                        <ul
+                            class="space-y-4 text-neutral-light font-montserrat"
+                        >
+                            <li class="flex items-start">
+                                <span class="text-secondary text-xl mr-3"
+                                    >★</span
+                                >
+                                Vallas publicitarias y gran formato
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-secondary text-xl mr-3"
+                                    >★</span
+                                >
+                                Displays portátiles y merchandising creativo
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- CTA final -->
+                <div
+                    class="text-center bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 rounded-3xl p-10 md:p-16 shadow-xl"
+                >
+                    <h3
+                        class="text-3xl md:text-4xl font-bold text-neutral mb-6 font-lobster"
+                    >
+                        ¿Quieres que tu marca se vea y se sienta inolvidable?
+                    </h3>
+                    <p
+                        class="text-lg text-neutral-light font-montserrat mb-10 max-w-3xl mx-auto"
+                    >
+                        Desde letras corpóreas hasta productos promocionales
+                        personalizados, creamos piezas que convierten y
+                        diferencian.
                     </p>
+                    <a
+                        href="/contacto"
+                        class="inline-block bg-primary hover:bg-primary-dark text-white font-bold text-lg py-5 px-12 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl font-montserrat shadow-lg"
+                    >
+                        Solicitar Cotización Ahora
+                    </a>
                 </div>
             </div>
         </section>

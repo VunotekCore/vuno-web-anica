@@ -1,6 +1,24 @@
 ---
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
 import Header from "../../components/Header.astro";
+
+const services = [
+    {
+        id: 1,
+        name: "MODELADO 3D",
+        image: "https://ik.imagekit.io/IV7VRclcnk/diseno_grafico/Dise%C3%B1o%20y%20modelado.webp",
+    },
+    {
+        id: 2,
+        name: "DISEÑO, MODELADO Y RENDERIZADO DE STAND",
+        image: "https://ik.imagekit.io/IV7VRclcnk/diseno_grafico/31.webp",
+    },
+    {
+        id: 3,
+        name: "PAQUETES PERSONALIZADOS",
+        image: "https://ik.imagekit.io/IV7VRclcnk/diseno_grafico/32.webp",
+    },
+];
 ---
 
 <DefaultLayout>
@@ -9,37 +27,274 @@ import Header from "../../components/Header.astro";
     <main class="w-full">
         <!-- Hero Section -->
         <section
-            class="w-full py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white"
+            class="w-full py-16 md:py-24 bg-gradient-to-br from-secondary/5 to-white"
         >
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
                     <h1
-                        class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-lobster"
+                        class="text-4xl md:text-6xl font-bold text-neutral mb-4"
                     >
-                        Diseño 3D
+                        <span class="font-lobster">Diseño Gráfico</span>
+                        <span class="text-secondary text-5xl md:text-7xl">
+                            &
+                        </span>
+                        <span
+                            class="font-lobster text-3xl md:text-5xl text-secondary-dark italic"
+                            >Modelado 3D</span
+                        >
                     </h1>
                     <p
-                        class="text-xl text-gray-600 font-montserrat max-w-3xl mx-auto"
+                        class="text-lg md:text-xl text-neutral-light font-montserrat max-w-4xl mx-auto leading-relaxed"
                     >
-                        Creamos diseños tridimensionales innovadores que dan
-                        vida a tus proyectos
+                        El diseño gráfico y el modelado 3D trabajan en sinergia
+                        para crear experiencias visuales impactantes. Desde la <span
+                            class="font-semibold text-secondary"
+                            >identidad corporativa</span
+                        > hasta
+                        <span class="font-semibold text-accent"
+                            >renders fotorrealistas</span
+                        >, transformamos ideas en realidades visuales que
+                        conectan con tu audiencia y elevan tu marca.
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- Content Section -->
+        <!-- Services Section -->
         <section class="w-full py-16 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="prose prose-lg max-w-none">
+                <!-- Identidad Corporativa -->
+                <div class="mb-12">
                     <h2
-                        class="text-3xl font-bold text-gray-900 mb-6 font-lobster"
+                        class="text-3xl md:text-4xl font-bold text-neutral mb-4 font-lobster"
                     >
-                        Nuestros Servicios
+                        Identidad Corporativa
                     </h2>
-                    <p class="text-gray-700 font-montserrat mb-8">
-                        Contenido próximamente...
+                    <p
+                        class="text-lg text-neutral-light font-montserrat leading-relaxed"
+                    >
+                        Creamos sistemas de identidad visual completos que
+                        reflejan la esencia de tu marca. Desde el diseño de
+                        logotipos hasta manuales de identidad corporativa,
+                        desarrollamos elementos coherentes que comunican
+                        profesionalismo y generan reconocimiento instantáneo en
+                        todos los puntos de contacto con tu audiencia.
                     </p>
+                </div>
+
+                <!-- Diseño Editorial -->
+                <div class="mb-12">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-neutral mb-4 font-lobster"
+                    >
+                        Diseño Editorial
+                    </h2>
+                    <p
+                        class="text-lg text-neutral-light font-montserrat leading-relaxed"
+                    >
+                        Transformamos contenido en publicaciones atractivas y
+                        funcionales. Diseñamos revistas, catálogos, libros,
+                        brochures y reportes anuales con layouts profesionales
+                        que facilitan la lectura y maximizan el impacto visual.
+                        Cada proyecto editorial es una oportunidad para contar
+                        tu historia de manera memorable.
+                    </p>
+                </div>
+
+                <!-- Publicidad Impresa y Digital -->
+                <div class="mb-12">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-neutral mb-4 font-lobster"
+                    >
+                        Publicidad Impresa y Digital
+                    </h2>
+                    <p
+                        class="text-lg text-neutral-light font-montserrat leading-relaxed"
+                    >
+                        Diseñamos campañas publicitarias que capturan la
+                        atención y generan conversiones. Ya sea para medios
+                        impresos tradicionales o plataformas digitales, creamos
+                        piezas publicitarias estratégicas que comunican tu
+                        mensaje de forma clara, persuasiva y visualmente
+                        impactante, adaptadas a cada canal y audiencia.
+                    </p>
+                </div>
+
+                <!-- Diseño para redes sociales -->
+                <div class="mb-16">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-neutral mb-4 font-lobster"
+                    >
+                        Diseño para redes sociales
+                    </h2>
+                    <p
+                        class="text-lg text-neutral-light font-montserrat leading-relaxed"
+                    >
+                        Creamos contenido visual optimizado para cada plataforma
+                        social. Desde posts orgánicos hasta anuncios pagados,
+                        diseñamos gráficos que detienen el scroll, generan
+                        engagement y refuerzan tu identidad de marca. Plantillas
+                        personalizadas, stories, reels y contenido adaptado a
+                        las tendencias actuales del marketing digital.
+                    </p>
+                </div>
+
+                <!-- Modelado 3D & Renderizado - Special Subsection -->
+                <div
+                    class="bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl p-8 md:p-12 mb-12"
+                >
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-neutral mb-4 font-lobster flex items-center gap-3"
+                    >
+                        <svg
+                            class="w-10 h-10 text-accent"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"
+                            ></path>
+                        </svg>
+                        Modelado 3D & Renderizado
+                    </h2>
+                    <p
+                        class="text-lg text-neutral-light font-montserrat leading-relaxed mb-8"
+                    >
+                        Llevamos tus ideas a la tercera dimensión con modelado
+                        3D de alta calidad y renderizado fotorrealista. Ideal
+                        para visualización arquitectónica, diseño de productos,
+                        stands comerciales y presentaciones de proyectos.
+                        Creamos representaciones virtuales tan realistas que tus
+                        clientes podrán experimentar el resultado final antes de
+                        su construcción o fabricación.
+                    </p>
+
+                    <!-- Combined Modelado 3D Image: Appears as one cohesive visual -->
+                    <div
+                        class="bg-gradient-to-br from-secondary/5 to-accent/5 rounded-xl p-8 border-2 border-gray-200 hover:border-secondary transition-all duration-300 hover:shadow-xl"
+                    >
+                        <div
+                            class="bg-gradient-to-br from-secondary/20 to-accent/20 rounded-lg mb-4 flex flex-col items-center justify-center overflow-hidden"
+                        >
+                            <div
+                                class="flex flex-row items-center justify-center w-full"
+                            >
+                                <img
+                                    src="https://ik.imagekit.io/IV7VRclcnk/diseno_grafico/26.webp"
+                                    class="h-auto object-contain transition-transform duration-300 hover:scale-105 flex-shrink-0"
+                                    alt="Modelado 3D - Parte Superior"
+                                />
+                                <img
+                                    src="https://ik.imagekit.io/IV7VRclcnk/diseno_grafico/27.webp"
+                                    class="h-auto object-contain transition-transform duration-300 hover:scale-105 flex-shrink-0"
+                                    alt="Modelado 3D - Parte Inferior"
+                                />
+                            </div>
+                            <img
+                                src={services[0].image}
+                                class="w-full h-auto object-contain transition-transform duration-300 hover:scale-105"
+                                alt={services[0].name}
+                            />
+                        </div>
+                        <p
+                            class="text-center font-montserrat font-bold text-xl text-neutral"
+                        >
+                            {services[0].name}
+                        </p>
+                    </div>
+                    <!-- Texto puente -->
+                    <p
+                        class="text-lg text-neutral-light font-montserrat leading-relaxed mb-10 italic border-l-4 border-accent pl-5"
+                    >
+                        Desde visualizaciones arquitectónicas hasta renders de
+                        producto y stands comerciales, creamos experiencias que
+                        venden antes de construir.
+                    </p>
+
+                    <!-- Featured Image: 3D Rendering -->
+                    <div
+                        class="bg-white rounded-xl p-8 border-2 border-accent hover:border-primary transition-all duration-300 hover:shadow-xl mb-8"
+                    >
+                        <div
+                            class="aspect-video bg-gradient-to-br from-accent/20 to-primary/20 rounded-lg mb-4 flex items-center justify-center overflow-hidden"
+                        >
+                            <img
+                                src={services[1].image}
+                                class="w-full h-full object-contain transition-transform duration-300 hover:scale-105"
+                                alt={services[1].name}
+                            />
+                        </div>
+                        <p
+                            class="text-center font-montserrat font-bold text-xl text-neutral"
+                        >
+                            {services[1].name}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Packaging -->
+                <div class="mb-12">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-neutral mb-4 font-lobster"
+                    >
+                        Packaging
+                    </h2>
+                    <p
+                        class="text-lg text-neutral-light font-montserrat leading-relaxed mb-8"
+                    >
+                        El empaque es la primera impresión física de tu
+                        producto. Diseñamos packaging innovador que no solo
+                        protege, sino que seduce, comunica valores de marca y se
+                        destaca en el punto de venta. Combinamos funcionalidad,
+                        estética y estrategia para crear experiencias de
+                        unboxing memorables que impulsan las ventas.
+                    </p>
+
+                    <!-- Featured Image: Packaging -->
+                    <div
+                        class="bg-gradient-to-br from-secondary/5 to-accent/5 rounded-xl p-8 border-2 border-gray-200 hover:border-secondary transition-all duration-300 hover:shadow-xl"
+                    >
+                        <div
+                            class="aspect-video bg-gradient-to-br from-secondary/20 to-accent/20 rounded-lg mb-4 flex items-center justify-center"
+                        >
+                            <img
+                                src={services[2].image}
+                                class="w-full h-full object-contain transition-transform duration-300 hover:scale-105"
+                                alt={services[2].name}
+                            />
+                        </div>
+                        <p
+                            class="text-center font-montserrat font-bold text-xl text-neutral"
+                        >
+                            {services[2].name}
+                        </p>
+                    </div>
+                </div>
+                <!-- CTA Section -->
+                <div
+                    class="mt-16 text-center bg-gradient-to-r from-secondary/10 via-accent/10 to-primary/10 rounded-2xl p-12"
+                >
+                    <h3
+                        class="text-3xl font-bold text-neutral mb-4 font-lobster"
+                    >
+                        Transforma tus ideas en diseños impactantes
+                    </h3>
+                    <p
+                        class="text-lg text-neutral-light font-montserrat mb-8 max-w-2xl mx-auto"
+                    >
+                        Desde identidad corporativa hasta modelado 3D, estamos
+                        listos para dar vida visual a tu proyecto.
+                    </p>
+                    <a
+                        href="/contacto"
+                        class="inline-block bg-secondary hover:bg-secondary-dark text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg font-montserrat"
+                    >
+                        Iniciar Proyecto
+                    </a>
                 </div>
             </div>
         </section>

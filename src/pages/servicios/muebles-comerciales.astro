@@ -1,6 +1,79 @@
 ---
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
 import Header from "../../components/Header.astro";
+
+const mueblesIMG = [
+    {
+        id: 1,
+        name: "MUEBLES DE PISO",
+        image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/7.webp",
+    },
+    {
+        id: 2,
+        name: "MUEBLES DE PISO",
+        image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/39.webp",
+    },
+    {
+        id: 3,
+        name: "MUEBLES DE PISO",
+        image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/MUEBLE%20PISO%201.webp",
+    },
+    {
+        id: 4,
+        name: "ACTIVACIÓN ARCO",
+        image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/3.webp",
+    },
+    {
+        id: 5,
+        name: "ISLA ESPECIAL",
+        image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/ISLA%20YUMMIES.webp",
+    },
+    {
+        id: 6,
+        name: "ISLA ESPECIAL (VARIANTE)",
+        image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/8.webp",
+    },
+    {
+        id: 7,
+        name: "MUEBLE TIPO CABECERA",
+        image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/2.webp",
+    },
+    {
+        id: 8,
+        name: "MUEBLE PUNTA DE GÓNDOLA",
+        image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/1.webp",
+    },
+    {
+        id: 9,
+        name: "MUEBLE TV / ENTRETENIMIENTO",
+        image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/55.webp",
+    },
+    {
+        id: 10,
+        name: "MUEBLE ESTANTERÍA",
+        image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/57.webp",
+    },
+    {
+        id: 11,
+        name: "ESCRITORIO MODULAR",
+        image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/56.webp",
+    },
+    {
+        id: 12,
+        name: "EXHIBIDOR",
+        image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/62.webp",
+    },
+    {
+        id: 13,
+        name: "ISLA",
+        image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/63.webp",
+    },
+    {
+        id: 14,
+        name: "BARRA BAR",
+        image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/61.webp",
+    },
+];
 ---
 
 <DefaultLayout>
@@ -9,37 +82,225 @@ import Header from "../../components/Header.astro";
     <main class="w-full">
         <!-- Hero Section -->
         <section
-            class="w-full py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white"
+            class="w-full py-16 md:py-24 bg-gradient-to-br from-premium/5 to-white"
         >
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
                     <h1
-                        class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-lobster"
+                        class="text-4xl md:text-6xl font-bold text-neutral mb-4"
                     >
-                        Muebles Comerciales
+                        <span class="font-lobster">Muebles Comerciales</span>
+                        <span class="text-premium text-5xl md:text-7xl">&</span>
+                        <span
+                            class="font-lobster text-3xl md:text-5xl text-premium-light italic"
+                            >Hogar</span
+                        >
                     </h1>
                     <p
-                        class="text-xl text-gray-600 font-montserrat max-w-3xl mx-auto"
+                        class="text-lg md:text-xl text-neutral-light font-montserrat max-w-4xl mx-auto leading-relaxed"
                     >
-                        Diseñamos y fabricamos mobiliario de exhibición y para
-                        el hogar con los más altos estándares
+                        El mobiliario es más que funcionalidad: es la expresión
+                        física de tu estilo y profesionalismo. Diseñamos y
+                        fabricamos
+                        <span class="font-semibold text-premium"
+                            >muebles comerciales</span
+                        > que optimizan espacios de trabajo y
+                        <span class="font-semibold text-secondary"
+                            >muebles para el hogar</span
+                        > que transforman ambientes en lugares acogedores y funcionales.
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- Content Section -->
-        <section class="w-full py-16 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="prose prose-lg max-w-none">
+        <!-- Contenido principal -->
+        <section class="w-full py-16 md:py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
+                <!-- Muebles publicitarios -->
+                <div>
                     <h2
-                        class="text-3xl font-bold text-gray-900 mb-6 font-lobster"
+                        class="text-3xl md:text-4xl font-bold text-neutral mb-6 font-lobster text-center md:text-left"
                     >
-                        Nuestros Servicios
+                        Muebles publicitarios
                     </h2>
-                    <p class="text-gray-700 font-montserrat mb-8">
-                        Contenido próximamente...
+                    <p
+                        class="text-lg text-neutral-light font-montserrat mb-10 max-w-3xl"
+                    >
+                        Soluciones de exhibición estratégica diseñadas para
+                        maximizar la visibilidad de tus productos en puntos de
+                        venta, activaciones de marca y eventos comerciales.
                     </p>
+
+                    <!-- Hero combinado: MUEBLES DE PISO (id 1+2+3) -->
+                    <div
+                        class="mb-16 bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-premium transition-all duration-300 hover:shadow-2xl"
+                    >
+                        <div
+                            class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 p-6 md:p-8"
+                        >
+                            <img
+                                src={mueblesIMG[0].image}
+                                class="w-full md:w-1/4 h-auto object-contain transition-transform duration-500 hover:scale-105"
+                                alt="Mueble de piso - vista 1"
+                                loading="lazy"
+                            />
+                            <img
+                                src={mueblesIMG[1].image}
+                                class="w-full md:w-1/4 h-auto object-contain transition-transform duration-500 hover:scale-105"
+                                alt="Mueble de piso - vista 2"
+                                loading="lazy"
+                            />
+                            <img
+                                src={mueblesIMG[2].image}
+                                class="w-full md:w-1/4 h-auto object-contain transition-transform duration-500 hover:scale-105"
+                                alt="Mueble de piso - vista 3"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div
+                            class="bg-gradient-to-r from-premium/5 to-secondary/5 py-5 text-center"
+                        >
+                            <p
+                                class="font-montserrat font-bold text-xl text-neutral"
+                            >
+                                MUEBLES DE PISO
+                            </p>
+                            <p class="text-neutral-light mt-1">
+                                Exhibición robusta y versátil para retail
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Galería restante de muebles publicitarios -->
+                    <div
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+                    >
+                        {
+                            [3, 4, 5, 6, 7].map((idx) => {
+                                const item = mueblesIMG[idx];
+                                return (
+                                    <div class="group bg-gray-50/60 rounded-xl overflow-hidden border border-gray-200 hover:border-premium/60 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                        <div class="aspect-square bg-gradient-to-br from-premium/5 to-secondary/5 flex items-center justify-center p-6 md:p-8">
+                                            <img
+                                                src={item.image}
+                                                class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                                                alt={item.name}
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <div class="p-5 text-center">
+                                            <p class="font-montserrat font-semibold text-lg text-neutral">
+                                                {item.name}
+                                            </p>
+                                        </div>
+                                    </div>
+                                );
+                            })
+                        }
+                    </div>
+                </div>
+
+                <!-- Muebles para el hogar -->
+                <div>
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-neutral mb-6 font-lobster text-center md:text-left"
+                    >
+                        Muebles para el hogar
+                    </h2>
+                    <p
+                        class="text-lg text-neutral-light font-montserrat mb-10 max-w-3xl"
+                    >
+                        Diseños personalizados que combinan estética,
+                        funcionalidad y calidad para crear espacios hogareños
+                        únicos que reflejan tu estilo de vida.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                        {
+                            [8, 9, 10].map((idx) => {
+                                const item = mueblesIMG[idx];
+                                return (
+                                    <div class="group bg-gradient-to-br from-secondary/5 to-premium/5 rounded-2xl overflow-hidden border border-gray-200 hover:border-premium transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                                        <div class="aspect-square p-8 md:p-10 flex items-center justify-center bg-white/60">
+                                            <img
+                                                src={item.image}
+                                                class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                                                alt={item.name}
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <div class="p-6 text-center bg-white/80">
+                                            <p class="font-montserrat font-bold text-xl text-neutral">
+                                                {item.name}
+                                            </p>
+                                        </div>
+                                    </div>
+                                );
+                            })
+                        }
+                    </div>
+                </div>
+
+                <!-- Exhibidores y barras especiales -->
+                <div
+                    class="bg-gradient-to-br from-premium/5 to-primary/5 rounded-2xl p-8 md:p-12 border border-premium/10"
+                >
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-neutral mb-10 font-lobster text-center"
+                    >
+                        Exhibidores y barras especiales
+                    </h2>
+                </div>
+
+                <div
+                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+                >
+                    {
+                        [11, 12, 13].map((idx) => {
+                            const item = mueblesIMG[idx];
+                            return (
+                                <div class="group bg-gray-50/60 rounded-xl overflow-hidden border border-gray-200 hover:border-premium/60 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                    <div class="aspect-square bg-gradient-to-br from-premium/5 to-secondary/5 flex items-center justify-center p-6 md:p-8">
+                                        <img
+                                            src={item.image}
+                                            class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                                            alt={item.name}
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                    <div class="p-5 text-center">
+                                        <p class="font-montserrat font-semibold text-lg text-neutral">
+                                            {item.name}
+                                        </p>
+                                    </div>
+                                </div>
+                            );
+                        })
+                    }
+                </div>
+
+                <!-- CTA final -->
+                <div
+                    class="text-center bg-gradient-to-r from-premium/10 via-primary/10 to-secondary/10 rounded-3xl p-12 md:p-16 shadow-xl"
+                >
+                    <h3
+                        class="text-3xl md:text-4xl font-bold text-neutral mb-6 font-lobster"
+                    >
+                        Muebles diseñados a tu medida
+                    </h3>
+                    <p
+                        class="text-lg md:text-xl text-neutral-light font-montserrat mb-10 max-w-3xl mx-auto"
+                    >
+                        Ya sea para tu hogar o tu negocio, creamos mobiliario
+                        personalizado que combina diseño, calidad y
+                        funcionalidad.
+                    </p>
+                    <a
+                        href="/contacto"
+                        class="inline-block bg-premium hover:bg-premium-dark text-white font-bold py-5 px-12 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl font-montserrat text-lg shadow-lg"
+                    >
+                        Solicitar Diseño Personalizado
+                    </a>
                 </div>
             </div>
         </section>
