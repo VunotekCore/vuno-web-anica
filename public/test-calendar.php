@@ -1,15 +1,15 @@
 <?php
 /**
- * Test de Google Calendar API
+ * Test de Google Calendar API (versión ligera)
  */
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/LightweightGoogleCalendar.php';
 $config = require __DIR__ . '/api/config.php';
 
-echo "=== TEST DE GOOGLE CALENDAR API ===\n\n";
+echo "=== TEST DE GOOGLE CALENDAR API (LIGERO) ===\n\n";
 
 // 1. Verificar credenciales
 echo "1. Verificando credenciales de Google Calendar...\n";
@@ -24,15 +24,16 @@ foreach ($requiredKeys as $key) {
 }
 echo "\n";
 
-// 2. Intentar crear cliente de Google
-echo "2. Creando cliente de Google...\n";
+// 2. Crear cliente ligero
+echo "2. Creando cliente ligero de Google Calendar...\n";
 try {
-    $client = new Google_Client();
-    $client->setClientId($config['google_calendar']['client_id']);
-    $client->setClientSecret($config['google_calendar']['client_secret']);
-    $client->setAccessType('offline');
-    $client->addScope(Google_Service_Calendar::CALENDAR_EVENTS);
-    echo "✅ Cliente de Google creado\n\n";
+    $googleConfig = [
+        'client_id' => $config['google_calendar']['client_id'],
+        'client_secret' => $config['google_calendar']['client_secret'],
+        'refresh_token' => $config['google_calendar']['refresh_token']
+    ];
+    $calendar = new LightweightGoogleCalendar($googleConfig);
+    echo "✅ Cliente de Google Calendar creado\n\n";
 } catch (Exception $e) {
     die("❌ ERROR al crear cliente: " . $e->getMessage() . "\n");
 }
@@ -40,20 +41,9 @@ try {
 // 3. Intentar refrescar token
 echo "3. Intentando refrescar token de acceso...\n";
 try {
-    $tokenResponse = $client->refreshToken($config['google_calendar']['refresh_token']);
-    $accessToken = $client->getAccessToken();
-    
-    if ($accessToken && isset($accessToken['access_token'])) {
-        echo "✅ Token de acceso obtenido exitosamente\n";
-        echo "   Expira en: " . ($accessToken['expires_in'] ?? 'N/A') . " segundos\n\n";
-    } else {
-        echo "❌ ERROR: No se pudo obtener access token\n";
-        echo "   Respuesta del refresh:\n";
-        print_r($tokenResponse);
-        echo "\n   Access token actual:\n";
-        print_r($accessToken);
-        exit(1);
-    }
+    $accessToken = $calendar->refreshToken();
+    echo "✅ Token de acceso obtenido exitosamente\n";
+    echo "   Token: " . substr($accessToken, 0, 20) . "...\n\n";
 } catch (Exception $e) {
     echo "❌ ERROR al refrescar token:\n";
     echo "   Mensaje: " . $e->getMessage() . "\n";
@@ -63,47 +53,45 @@ try {
     echo "   2. Client ID o Client Secret incorrectos\n";
     echo "   3. Aplicación no autorizada en Google Cloud Console\n";
     echo "   4. Refresh token no tiene los permisos correctos\n";
-    echo "\nSolución: Genera un nuevo refresh token siguiendo la guía google-calendar-setup.md\n";
+    echo "\nSolución: Genera un nuevo refresh token usando get-refresh-token.php\n";
     exit(1);
 }
 
-// 4. Crear servicio de Calendar
-echo "4. Creando servicio de Google Calendar...\n";
+// 4. Listar calendarios
+echo "4. Listando calendarios disponibles...\n";
 try {
-    $service = new Google_Service_Calendar($client);
-    echo "✅ Servicio de Calendar creado\n\n";
-} catch (Exception $e) {
-    die("❌ ERROR al crear servicio: " . $e->getMessage() . "\n");
-}
-
-// 5. Listar calendarios
-echo "5. Listando calendarios disponibles...\n";
-try {
-    $calendarList = $service->calendarList->listCalendarList();
-    echo "✅ Calendarios encontrados:\n";
-    foreach ($calendarList->getItems() as $calendar) {
-        $isPrimary = $calendar->getId() === 'primary' || $calendar->getPrimary();
-        $marker = $isPrimary ? ' [PRIMARY]' : '';
-        echo "   - " . $calendar->getSummary() . " (ID: " . $calendar->getId() . ")$marker\n";
+    // Crear un endpoint simple para listar calendarios
+    $listUrl = 'https://www.googleapis.com/calendar/v3/users/me/calendarList';
+    $response = $calendar->makeRequest($listUrl, 'GET', null);
+    
+    if (isset($response['items'])) {
+        echo "✅ Calendarios encontrados:\n";
+        foreach ($response['items'] as $calendarInfo) {
+            $isPrimary = $calendarInfo['id'] === 'primary' || ($calendarInfo['primary'] ?? false);
+            $marker = $isPrimary ? ' [PRIMARY]' : '';
+            echo "   - " . ($calendarInfo['summary'] ?? 'Sin nombre') . " (ID: " . $calendarInfo['id'] . ")$marker\n";
+        }
+        echo "\n";
+    } else {
+        echo "⚠️ No se encontraron calendarios\n\n";
     }
-    echo "\n";
 } catch (Exception $e) {
     echo "❌ ERROR al listar calendarios:\n";
     echo "   " . $e->getMessage() . "\n\n";
 }
 
-// 6. Intentar crear un evento de prueba
-echo "6. Intentando crear evento de prueba...\n";
+// 5. Intentar crear un evento de prueba
+echo "5. Intentando crear evento de prueba...\n";
 try {
-    $event = new Google_Service_Calendar_Event([
-        'summary' => 'Test desde formulario de contacto',
-        'description' => 'Este es un evento de prueba. Puedes eliminarlo.',
+    $eventData = [
+        'summary' => 'Test desde formulario de contacto (LIGERO)',
+        'description' => 'Este es un evento de prueba usando la librería ligera. Puedes eliminarlo.',
         'start' => [
-            'dateTime' => date('Y-m-d\TH:i:s', strtotime('+1 day')),
+            'dateTime' => date('c', strtotime('+1 day')),
             'timeZone' => $config['google_calendar']['timezone'],
         ],
         'end' => [
-            'dateTime' => date('Y-m-d\TH:i:s', strtotime('+1 day +1 hour')),
+            'dateTime' => date('c', strtotime('+1 day +1 hour')),
             'timeZone' => $config['google_calendar']['timezone'],
         ],
         'attendees' => [
@@ -112,18 +100,15 @@ try {
                 'displayName' => 'Usuario de Prueba',
             ]
         ],
-    ]);
+    ];
     
     $calendarId = $config['google_calendar']['calendar_id'];
-    $createdEvent = $service->events->insert($calendarId, $event, [
-        'sendUpdates' => 'none', // No enviar invitaciones para el test
-        'conferenceDataVersion' => 1
-    ]);
+    $createdEvent = $calendar->createEvent($calendarId, $eventData);
     
     echo "✅ ¡EVENTO CREADO EXITOSAMENTE!\n";
-    echo "   ID: " . $createdEvent->getId() . "\n";
-    echo "   Link: " . $createdEvent->getHtmlLink() . "\n";
-    echo "   Inicio: " . $createdEvent->getStart()->getDateTime() . "\n\n";
+    echo "   ID: " . $createdEvent['id'] . "\n";
+    echo "   Link: " . $createdEvent['htmlLink'] . "\n";
+    echo "   Inicio: " . $createdEvent['start']['dateTime'] . "\n\n";
     
     echo "NOTA: Revisa tu Google Calendar. Puedes eliminar este evento de prueba.\n";
     
@@ -131,11 +116,6 @@ try {
     echo "❌ ERROR al crear evento:\n";
     echo "   Mensaje: " . $e->getMessage() . "\n";
     echo "   Código: " . $e->getCode() . "\n";
-    
-    if (method_exists($e, 'getErrors')) {
-        echo "   Errores detallados:\n";
-        print_r($e->getErrors());
-    }
 }
 
 echo "\n=== FIN DEL TEST ===\n";

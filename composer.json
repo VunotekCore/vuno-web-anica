@@ -4,8 +4,7 @@
     "type": "project",
     "require": {
         "php": ">=7.4",
-        "phpmailer/phpmailer": "^6.9",
-        "google/apiclient": "^2.15"
+        "phpmailer/phpmailer": "^6.9"
     },
     "config": {
         "platform": {
