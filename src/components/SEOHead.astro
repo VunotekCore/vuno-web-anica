@@ -1,0 +1,91 @@
+---
+// SEO Head Component - Centralized SEO Management
+interface Props {
+    title?: string;
+    description?: string;
+    keywords?: string;
+    ogImage?: string;
+    canonical?: string;
+    noindex?: boolean;
+}
+
+const {
+    title = "Anica Soluciones Integrales | Diseño, Impresión y Desarrollo Web en Nicaragua",
+    description = "Anica Soluciones Integrales ofrece servicios profesionales de medios visuales, diseño gráfico, modelado 3D, desarrollo web, programación y muebles comerciales en Nicaragua. Soluciones personalizadas para tu negocio.",
+    keywords = "diseño gráfico Nicaragua, impresión Nicaragua, desarrollo web Nicaragua, rotulación comercial, modelado 3D, muebles comerciales, diseño UI/UX, publicidad exterior, branding, identidad corporativa",
+    ogImage = "/og-image.jpg",
+    canonical,
+    noindex = false,
+} = Astro.props;
+
+// Get current URL for canonical and OG tags
+const currentUrl = canonical || Astro.url.href;
+const siteUrl = Astro.site || "https://anicasolucionesintegrales.com";
+
+// Structured Data for Organization
+const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Anica Soluciones Integrales",
+    url: siteUrl,
+    logo: `${siteUrl}/logo.png`,
+    description:
+        "Empresa nicaragüense especializada en soluciones integrales de diseño, impresión, desarrollo web y muebles comerciales",
+    address: {
+        "@type": "PostalAddress",
+        addressCountry: "NI",
+        addressLocality: "Nicaragua",
+    },
+    contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        availableLanguage: ["Spanish"],
+    },
+    sameAs: [
+        // Add social media URLs here when available
+    ],
+};
+---
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Canonical URL -->
+<link rel="canonical" href={currentUrl} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={currentUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta
+    property="og:image"
+    content={ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`}
+/>
+<meta property="og:locale" content="es_NI" />
+<meta property="og:site_name" content="Anica Soluciones Integrales" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={currentUrl} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta
+    name="twitter:image"
+    content={ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`}
+/>
+
+<!-- Structured Data (JSON-LD) -->
+<script
+    type="application/ld+json"
+    set:html={JSON.stringify(organizationSchema)}
+/>
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="alternate icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />

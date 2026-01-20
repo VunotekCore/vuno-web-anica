@@ -1,6 +1,7 @@
 ---
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
 import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
 
 const mueblesIMG = [
     {
@@ -74,9 +75,17 @@ const mueblesIMG = [
         image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/61.webp",
     },
 ];
+
+const seoConfig = {
+    title: "Muebles Comerciales y para el Hogar | Anica Soluciones Integrales",
+    description:
+        "Diseño y fabricación de muebles comerciales, publicitarios y para el hogar en Nicaragua. Exhibidores, islas, muebles de piso, barras y mobiliario personalizado.",
+    keywords:
+        "muebles comerciales Nicaragua, muebles publicitarios, exhibidores, islas comerciales, muebles para el hogar, mobiliario personalizado Nicaragua",
+};
 ---
 
-<DefaultLayout>
+<DefaultLayout {...seoConfig}>
     <Header />
 
     <main class="w-full">
@@ -305,4 +314,5 @@ const mueblesIMG = [
             </div>
         </section>
     </main>
+    <Footer />
 </DefaultLayout>

@@ -1,6 +1,7 @@
 ---
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
 import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
 
 const services = [
     {
@@ -19,9 +20,17 @@ const services = [
         image: "https://ik.imagekit.io/IV7VRclcnk/diseno_grafico/32.webp",
     },
 ];
+
+const seoConfig = {
+    title: "Diseño Gráfico y Modelado 3D | Anica Soluciones Integrales",
+    description:
+        "Servicios de diseño gráfico, identidad corporativa, diseño editorial, packaging, modelado 3D y renderizado en Nicaragua. Creamos experiencias visuales impactantes.",
+    keywords:
+        "diseño gráfico Nicaragua, identidad corporativa, modelado 3D, renderizado, packaging, diseño editorial, branding Nicaragua",
+};
 ---
 
-<DefaultLayout>
+<DefaultLayout {...seoConfig}>
     <Header />
 
     <main class="w-full">
@@ -299,4 +308,5 @@ const services = [
             </div>
         </section>
     </main>
+    <Footer />
 </DefaultLayout>

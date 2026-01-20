@@ -1,9 +1,18 @@
 ---
 import DefaultLayout from "../../layouts/DefaultLayout.astro";
 import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+const seoConfig = {
+    title: "Desarrollo Web y Programación | Anica Soluciones Integrales",
+    description:
+        "Servicios de desarrollo web, aplicaciones móviles, sistemas empresariales (ERP, CRM, POS) y automatización en Nicaragua. Diseño UI/UX, e-commerce y soluciones digitales personalizadas.",
+    keywords:
+        "desarrollo web Nicaragua, programación Nicaragua, aplicaciones móviles, diseño UI/UX, e-commerce, ERP, CRM, sistemas POS, desarrollo de software Nicaragua",
+};
 ---
 
-<DefaultLayout>
+<DefaultLayout {...seoConfig}>
     <Header />
 
     <main class="w-full">
@@ -687,4 +696,5 @@ import Header from "../../components/Header.astro";
             </div>
         </section>
     </main>
+    <Footer />
 </DefaultLayout>

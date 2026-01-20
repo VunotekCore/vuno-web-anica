@@ -4,18 +4,30 @@ import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
 import Services from "../components/sections/Services.astro";
 import Institucional from "../components/sections/Institucional.astro";
+import Footer from "../components/Footer.astro";
 import { getPageInfo, getSiteInfo } from "../services/wp";
 
 // const siteInfo = await getSiteInfo();
 // console.log("informacion del sitio", siteInfo);
 // const { title, content } = await getPageInfo("sample-page");
+
+// SEO Configuration for Homepage
+const seoConfig = {
+  title:
+    "Anica Soluciones Integrales | Diseño, Impresión y Desarrollo Web en Nicaragua",
+  description:
+    "Anica Soluciones Integrales ofrece servicios profesionales de medios visuales, diseño gráfico, modelado 3D, desarrollo web, programación y muebles comerciales en Nicaragua. Soluciones personalizadas para tu negocio.",
+  keywords:
+    "diseño gráfico Nicaragua, impresión Nicaragua, desarrollo web Nicaragua, rotulación comercial, modelado 3D, muebles comerciales, diseño UI/UX, publicidad exterior, branding, identidad corporativa, medios visuales, programación Nicaragua",
+};
 ---
 
-<DefaultLayout>
+<DefaultLayout {...seoConfig}>
   <Header />
   <Hero />
   <Services />
   <Institucional />
+  <Footer />
   <!-- <span>{siteInfo?.site?.name}</span> -->
 </DefaultLayout>
 
