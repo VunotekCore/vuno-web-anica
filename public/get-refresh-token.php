@@ -4,7 +4,7 @@
  * Ejecuta este script y sigue las instrucciones
  */
 
-require_once __DIR__ . '/../vendor/LightweightGoogleCalendar.php';
+require_once __DIR__ . '/vendor/LightweightGoogleCalendar.php';
 $config = require __DIR__ . '/api/config.php';
 
 // Configuración

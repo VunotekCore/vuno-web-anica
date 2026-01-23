@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Cargar Google Calendar ligero
-require_once __DIR__ . '/../../vendor/LightweightGoogleCalendar.php';
+require_once __DIR__ . '/../vendor/LightweightGoogleCalendar.php';
 
 try {
     // Obtener datos del formulario
