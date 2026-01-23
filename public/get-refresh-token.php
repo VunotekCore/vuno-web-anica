@@ -17,7 +17,7 @@ echo "<!DOCTYPE html>\n<html>\n<head>\n<title>Generar Refresh Token</title>\n<st
 echo "<h1>🔑 Generador de Refresh Token para Google Calendar</h1>\n";
 
 // Crear URL de autorización manualmente
-$scope = urlencode('https://www.googleapis.com/auth/calendar.events');
+$scope = 'https://www.googleapis.com/auth/calendar';
 $authUrl = "https://accounts.google.com/o/oauth2/v2/auth?" . http_build_query([
     'client_id' => $clientId,
     'redirect_uri' => $redirectUri,

@@ -8,7 +8,7 @@ ini_set('display_errors', 1);
 
 require_once __DIR__ . '/../vendor/LightweightGoogleCalendar.php';
 $config = require __DIR__ . '/api/config.php';
-
+echo "config -> " . json_encode($config);
 echo "=== TEST DE GOOGLE CALENDAR API (LIGERO) ===\n\n";
 
 // 1. Verificar credenciales
