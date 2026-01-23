@@ -1,0 +1,15 @@
+# Robots.txt - Anica Soluciones Integrales
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow admin or private paths (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Sitemap location
+Sitemap: https://anicasolucionesintegrales.com/sitemap-index.xml
+
+# Crawl-delay (optional, adjust if needed)
+# Crawl-delay: 1

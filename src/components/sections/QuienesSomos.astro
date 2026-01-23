@@ -1,15 +1,32 @@
-<p>
-    ¿Quiénes somos? Anica Soluciones Integrales, es una pequeña empresa,
-    inscrita como PYMES ante las instancias de gobierno, con seis años en el
-    mercado nacional lo que nos proporciona experiencia en los tipos de
-    materiales, medidas, diseños y todo aquello que pueda dar respuesta a las
-    necesidades de nuestros clientes, tenemos como finalidad la producción de
-    medios publicitarios (Material POP), mueblería de exhibición y para el
-    hogar, así como materiales promocionales tales como sublimados, impresión y
-    corte láser, diseños gráficos originales, también les ofrecemos el servicio
-    de diseño y creación de programas empresariales (páginas web, manejo de
-    redes sociales, programas específicos para cada empresa tales como;
-    contables, manejo de inventarios, facturación, manejo de personal –
-    asistencia, planillas, vacaciones – todos nuestros servicios están enfocados
-    en el bienestar de nuestros clientes.
-</p>
+---
+interface Props {
+  content: string;
+}
+
+const { content } = Astro.props;
+// separar en dos partes el contenido usando como separador <!--more-->
+const parts = content.split("<!--more-->");
+//  0 contiene la parte introducatoria
+// 1 contiene la parte principal
+const mainContent = parts.length > 1 ? parts[1] : content;
+---
+
+<article class="prose prose-lg max-w-none lg:prose-xl">
+  <div set:html={mainContent} />
+  <style is:global>
+    article ul {
+      list-style-type: disc !important;
+      padding-left: 1.5em;
+    }
+    article li {
+      list-style-type: disc !important;
+    }
+    article h4 {
+      font-family: "Lobster", cursive !important;
+      font-size: 1.3rem !important;
+    }
+    p {
+      text-align: justify;
+    }
+  </style>
+</article>

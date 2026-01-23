@@ -1,12 +1,31 @@
 ---
 import "../styles/global.css";
+import SEOHead from "../components/SEOHead.astro";
+import { ClientRouter } from 'astro:transitions';
+
+// SEO Props Interface
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  ogImage?: string;
+  canonical?: string;
+  noindex?: boolean;
+}
+
+const seoProps = Astro.props;
+
+// Google Analytics Measurement ID from environment
+const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 ---
 
 <html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Anica</title>
+
+    <!-- SEO Meta Tags -->
+    <SEOHead {...seoProps} />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,8 +34,22 @@ import "../styles/global.css";
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Lobster&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Google Analytics -->
+    {GA_MEASUREMENT_ID && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
+        <script is:inline define:vars={{ GA_MEASUREMENT_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', GA_MEASUREMENT_ID);
+        </script>
+      </>
+    )}
+    <ClientRouter />
   </head>
-  <body class="antialiased bg-white text-gray-900">
+  <body class="antialiased bg-white text-gray-900 flex flex-col min-h-screen">
     <slot />
   </body>
 </html>

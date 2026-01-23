@@ -2,9 +2,18 @@
 import DefaultLayout from "../layouts/DefaultLayout.astro";
 import Header from "../components/Header.astro";
 import ContactForm from "../components/Contact-form.astro";
+import Footer from "../components/Footer.astro";
+
+const seoConfig = {
+    title: "Contacto | Anica Soluciones Integrales",
+    description:
+        "Contáctanos para cotizar tus proyectos de diseño gráfico, impresión, desarrollo web y muebles comerciales. Estamos listos para ayudarte.",
+    keywords:
+        "contacto Anica, cotización diseño Nicaragua, presupuesto impresión, consultoría web Nicaragua",
+};
 ---
 
-<DefaultLayout>
+<DefaultLayout {...seoConfig}>
     <Header />
 
     <main class="w-full">
@@ -128,4 +137,5 @@ import ContactForm from "../components/Contact-form.astro";
             </div>
         </section>
     </main>
+    <Footer />
 </DefaultLayout>

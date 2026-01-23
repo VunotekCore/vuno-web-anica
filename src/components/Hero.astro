@@ -20,14 +20,16 @@ import HeroSlider from "../components/HeroSlider.astro";
       <!-- RIGHT: Formulario + WhatsApp + Redes -->
       <div class="flex flex-col items-center gap-6 md:gap-10">
         <!-- Contenido Derecho -->
-        <div class="w-full max-w-sm">
+        <div class="w-full max-w-sm relative">
           <div
             class="flex items-center bg-white border border-[#515151] rounded-xl shadow-sm px-5 py-3"
           >
             <input
+              id="search-input"
               type="text"
               placeholder="Buscar servicios, productos, proyectos..."
               class="flex-1 outline-none text-sm font-lobster"
+              autocomplete="off"
             />
             <svg
               width="20"
@@ -40,7 +42,94 @@ import HeroSlider from "../components/HeroSlider.astro";
               ></path>
             </svg>
           </div>
+
+          <!-- Search Results Dropdown -->
+          <div
+            id="search-results"
+            class="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-gray-100 hidden z-50 overflow-hidden max-h-96 overflow-y-auto"
+          >
+            <!-- Results will be injected here -->
+          </div>
         </div>
+
+        <script>
+          let searchIndex = [];
+          let isLoading = false;
+
+          const searchInput = document.getElementById("search-input");
+          const searchResults = document.getElementById("search-results");
+
+          // Load index once on interaction
+          const loadIndex = async () => {
+            if (searchIndex.length > 0 || isLoading) return;
+            isLoading = true;
+            try {
+              const res = await fetch("/api/search.json");
+              searchIndex = await res.json();
+            } catch (e) {
+              console.error("Error loading search index", e);
+            } finally {
+              isLoading = false;
+            }
+          };
+
+          searchInput?.addEventListener("focus", loadIndex);
+
+          searchInput?.addEventListener("input", (e) => {
+            const query = (e.target as HTMLInputElement).value.toLowerCase();
+
+            if (query.length < 2) {
+              searchResults?.classList.add("hidden");
+              return;
+            }
+
+            const results = searchIndex.filter((item) => {
+              const title = item.title?.toLowerCase() || "";
+              const type = item.type?.toLowerCase() || "";
+              return title.includes(query) || type.includes(query);
+            });
+
+            if (results.length > 0) {
+              const html = results
+                .map(
+                  (item) => `
+        <a href="${item.url}" class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-50 last:border-0 transition-colors">
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-bold text-neutral text-sm">${item.title}</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">${item.type}</span>
+          </div>
+          <p class="text-xs text-neutral-light line-clamp-1">${item.excerpt || ""}</p>
+        </a>
+      `,
+                )
+                .join("");
+
+              if (searchResults) {
+                searchResults.innerHTML = html;
+                searchResults.classList.remove("hidden");
+              }
+            } else {
+              if (searchResults) {
+                searchResults.innerHTML = `
+                <div class="px-4 py-3 text-sm text-neutral-light text-center">
+                    No se encontraron resultados para "${query}"
+                </div>
+            `;
+                searchResults.classList.remove("hidden");
+              }
+            }
+          });
+
+          // Close when clicking outside
+          document.addEventListener("click", (e) => {
+            if (
+              !searchInput?.contains(e.target as Node) &&
+              !searchResults?.contains(e.target as Node)
+            ) {
+              searchResults?.classList.add("hidden");
+            }
+          });
+        </script>
 
         <!-- Floating Contact Buttons -->
         <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-4">

@@ -1,0 +1,70 @@
+---
+// Footer Component - Anica Soluciones Integrales
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="w-full flex flex-col mt-auto">
+    <!-- Navigation Section (Top) -->
+    <div class="w-full bg-neutral py-8 md:py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+                class="flex flex-col md:flex-row justify-center items-center gap-4 text-sm text-gray-400 font-montserrat"
+            >
+                <a href="/" class="hover:text-primary transition-colors"
+                    >Inicio</a
+                >
+                <span class="hidden md:inline">•</span>
+                <a
+                    href="/#quienes-somos"
+                    class="hover:text-primary transition-colors"
+                    >Quiénes Somos</a
+                >
+                <span class="hidden md:inline">•</span>
+                <a
+                    href="/servicios/medios-visuales"
+                    class="hover:text-primary transition-colors">Servicios</a
+                >
+                <span class="hidden md:inline">•</span>
+                <a
+                    href="https://anicasolucionesintegrales.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="hover:text-primary transition-colors">Contacto</a
+                >
+            </div>
+        </div>
+    </div>
+
+    <!-- Copyright Section (Bottom) -->
+    <div class="w-full bg-[#1a1a1a] py-6 text-white border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+                class="flex flex-col md:flex-row justify-between items-center gap-6"
+            >
+                <!-- Copyright Section -->
+                <div class="text-center md:text-left">
+                    <p class="text-sm md:text-base font-montserrat">
+                        © {currentYear}
+                        <span class="font-semibold"
+                            >Anica Soluciones Integrales</span
+                        >. Todos los derechos reservados.
+                    </p>
+                </div>
+
+                <!-- Designed By Section -->
+                <div class="text-center md:text-right">
+                    <p class="text-sm md:text-base font-montserrat">
+                        Diseñado por <span
+                            class="font-semibold text-primary hover:text-primary-light transition-colors"
+                            ><a
+                                href="https://therealdevs.pro"
+                                target="_blank"
+                                rel="noopener noreferrer">therealdevs.pro</a
+                            ></span
+                        >
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

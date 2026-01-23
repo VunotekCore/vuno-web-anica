@@ -1,10 +1,10 @@
 <?php
 /**
- * Script para generar Refresh Token de Google Calendar
+ * Script para generar Refresh Token de Google Calendar (versión ligera)
  * Ejecuta este script y sigue las instrucciones
  */
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/LightweightGoogleCalendar.php';
 $config = require __DIR__ . '/api/config.php';
 
 // Configuración
@@ -16,20 +16,19 @@ echo "<!DOCTYPE html>\n<html>\n<head>\n<title>Generar Refresh Token</title>\n<st
 
 echo "<h1>🔑 Generador de Refresh Token para Google Calendar</h1>\n";
 
-// Crear cliente
-$client = new Google_Client();
-$client->setClientId($clientId);
-$client->setClientSecret($clientSecret);
-$client->setRedirectUri($redirectUri);
-$client->setAccessType('offline');
-$client->setPrompt('consent'); // Forzar pantalla de consentimiento
-$client->setApprovalPrompt('force'); // Forzar nuevo refresh token
-$client->addScope(Google_Service_Calendar::CALENDAR_EVENTS);
+// Crear URL de autorización manualmente
+$scope = 'https://www.googleapis.com/auth/calendar';
+$authUrl = "https://accounts.google.com/o/oauth2/v2/auth?" . http_build_query([
+    'client_id' => $clientId,
+    'redirect_uri' => $redirectUri,
+    'scope' => $scope,
+    'response_type' => 'code',
+    'access_type' => 'offline',
+    'prompt' => 'consent'
+]);
 
 // Si no hay código en la URL, mostrar link de autorización
 if (!isset($_GET['code'])) {
-    $authUrl = $client->createAuthUrl();
-    
     echo "<h2>Paso 1: Autorizar la Aplicación</h2>\n";
     echo "<p>Haz clic en el botón de abajo para autorizar la aplicación:</p>\n";
     echo "<p><a href='$authUrl' style='display:inline-block;background:#4285f4;color:white;padding:12px 24px;text-decoration:none;border-radius:4px;font-weight:bold;'>🔐 Autorizar con Google</a></p>\n";
@@ -46,7 +45,7 @@ if (!isset($_GET['code'])) {
     echo "<pre>";
     echo "Client ID: $clientId\n";
     echo "Redirect URI: $redirectUri\n";
-    echo "Scopes: Google Calendar Events\n";
+    echo "Scope: Calendar Events\n";
     echo "</pre>\n";
     
     echo "<p class='warning'><strong>Nota:</strong> Si ves un error de \"redirect_uri_mismatch\", agrega esta URL en Google Cloud Console:</p>\n";
@@ -57,8 +56,24 @@ if (!isset($_GET['code'])) {
     echo "<h2>Paso 2: Generando Tokens...</h2>\n";
     
     try {
-        $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-        
+        $data = [
+            'code' => $_GET['code'],
+            'client_id' => $clientId,
+            'client_secret' => $clientSecret,
+            'redirect_uri' => $redirectUri,
+            'grant_type' => 'authorization_code'
+        ];
+
+        $ch = curl_init('https://oauth2.googleapis.com/token');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        $token = json_decode($response, true);
+
         if (isset($token['error'])) {
             echo "<p class='error'>❌ <strong>Error:</strong></p>\n";
             echo "<pre>";
@@ -101,7 +116,7 @@ if (!isset($_GET['code'])) {
                 echo "<p>Después de actualizar <code>config.php</code>, ejecuta:</p>\n";
                 echo "<pre>php public/test-calendar.php</pre>\n";
                 
-                echo "<p>Si todo está correcto, deberías ver: <span class='success'>✅ Token de acceso obtenido exitosamente</span></p>\n";
+                echo "<p>Si todo está correcto, deberías ver: <span class='success'>✅ ¡EVENTO CREADO EXITOSAMENTE!</span></p>\n";
                 
             } else {
                 echo "<p class='warning'>⚠️ <strong>Advertencia:</strong> No se generó un refresh token nuevo.</p>\n";

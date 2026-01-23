@@ -44,8 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Cargar Google API Client
-require_once __DIR__ . '/../../vendor/autoload.php';
+// Cargar Google Calendar ligero
+require_once __DIR__ . '/../../vendor/LightweightGoogleCalendar.php';
 
 try {
     // Obtener datos del formulario
@@ -63,30 +63,26 @@ try {
         }
     }
     
-    // Crear cliente de Google
-    $client = new Google_Client();
-    $client->setClientId($config['google_calendar']['client_id']);
-    $client->setClientSecret($config['google_calendar']['client_secret']);
-    $client->setAccessType('offline');
-    $client->addScope(Google_Service_Calendar::CALENDAR_EVENTS);
+    // Crear cliente de Google Calendar ligero
+    $googleConfig = [
+        'client_id' => $config['google_calendar']['client_id'],
+        'client_secret' => $config['google_calendar']['client_secret'],
+        'refresh_token' => $config['google_calendar']['refresh_token']
+    ];
     
-    // Configurar refresh token
-    $client->refreshToken($config['google_calendar']['refresh_token']);
-    
-    // Crear servicio de Calendar
-    $service = new Google_Service_Calendar($client);
+    $calendar = new LightweightGoogleCalendar($googleConfig);
     
     // Preparar datos del evento
     $eventData = prepareEventData($data, $config);
     
     // Crear evento en el calendario principal
-    $event = new Google_Service_Calendar_Event($eventData);
     $calendarId = $config['google_calendar']['calendar_id'];
     
-    $createdEvent = $service->events->insert($calendarId, $event, [
-        'sendUpdates' => 'all', // Enviar invitaciones por email
-        'conferenceDataVersion' => 1 // Necesario para Google Meet
-    ]);
+    if ($data['meetingType'] === 'virtual') {
+        $createdEvent = $calendar->createEventWithMeet($calendarId, $eventData);
+    } else {
+        $createdEvent = $calendar->createEvent($calendarId, $eventData);
+    }
     
     // Crear evento en calendarios adicionales si están configurados
     $additionalCalendars = $config['google_calendar']['additional_calendars'] ?? [];
@@ -94,17 +90,17 @@ try {
     
     foreach ($additionalCalendars as $additionalCalendarId) {
         try {
-            $additionalEvent = $service->events->insert($additionalCalendarId, $event, [
-                'sendUpdates' => 'all',
-                'conferenceDataVersion' => 1
-            ]);
+            if ($data['meetingType'] === 'virtual') {
+                $additionalEvent = $calendar->createEventWithMeet($additionalCalendarId, $eventData);
+            } else {
+                $additionalEvent = $calendar->createEvent($additionalCalendarId, $eventData);
+            }
             $additionalEvents[] = [
                 'calendar_id' => $additionalCalendarId,
-                'event_id' => $additionalEvent->getId(),
-                'link' => $additionalEvent->getHtmlLink()
+                'event_id' => $additionalEvent['id'],
+                'link' => $createdEvent['htmlLink']
             ];
         } catch (Exception $e) {
-            // Log error pero continuar con otros calendarios
             error_log("Error al crear evento en calendario $additionalCalendarId: " . $e->getMessage());
         }
     }
@@ -115,13 +111,12 @@ try {
         'success' => true,
         'message' => 'Reunión agendada exitosamente',
         'event' => [
-            'id' => $createdEvent->getId(),
-            'link' => $createdEvent->getHtmlLink(),
-            'start' => $createdEvent->getStart()->getDateTime(),
+            'id' => $createdEvent['id'],
+            'link' => $createdEvent['htmlLink'],
+            'start' => $createdEvent['start']['dateTime'],
         ]
     ];
     
-    // Agregar información de calendarios adicionales si existen
     if (!empty($additionalEvents)) {
         $response['additional_calendars'] = $additionalEvents;
     }

@@ -1,13 +1,32 @@
-<p>
-    Nuestros Valores: 1. Amor a Dios:  Y todo lo que hagáis, hacedlo de corazón,
-    como para el Señor y no para los hombres.” (Colosenses 3:23) 2. Excelencia:
-    Nos enfocamos en materiales y conocimientos de la mas alta calidad, proceso
-    de producción y acabado. 3. Innovación: Adaptamos día a día nuestros diseños
-    y técnicas para ofrecer soluciones a las necesidades propias de nuestros
-    clientes. 4. Compromiso: Garantizar la entrega en tiempo de acuerdo con las
-    necesidades específicas de nuestros clientes 5. Integridad: Nuestro lema es
-    la transparencia y la ética en todos nuestros servicios. 6. Versatilidad:
-    Nuestra experiencia y conocimiento de las materias primas existentes en el
-    mercado nos permite brindar un servicio que satisfaga los más altos
-    estándares solicitados
-</p>
+---
+interface Props {
+    content: string;
+}
+
+const { content } = Astro.props;
+// separar en dos partes el contenido usando como separador <!--more-->
+const parts = content.split("<!--more-->");
+//  0 contiene la parte introducatoria
+// 1 contiene la parte principal
+const mainContent = parts.length > 1 ? parts[1] : content;
+---
+
+<article class="prose prose-lg max-w-none lg:prose-xl">
+    <div set:html={mainContent} />
+    <style is:global>
+        article ul {
+            list-style-type: disc !important;
+            padding-left: 1.5em;
+        }
+        article li {
+            list-style-type: disc !important;
+        }
+        article h4 {
+            font-family: "Lobster", cursive !important;
+            font-size: 1.3rem !important;
+        }
+        p {
+            text-align: justify;
+        }
+    </style>
+</article>
