@@ -5,9 +5,24 @@ import Vision from "./Vision.astro";
 import NuestrosValores from "./NuestrosValores.astro";
 import { getPostsByCategory } from "../../services/wp";
 
-const institucional = await getPostsByCategory("institucional");
+const institucional: Record<
+  string,
+  { title: string; excerpt_plain: string; content_plain: string }
+> = await getPostsByCategory("institucional");
 
-const sections = [
+type SectionComponent =
+  | typeof QuienesSomos
+  | typeof Mision
+  | typeof Vision
+  | typeof NuestrosValores;
+
+const sections: Array<{
+  id: string;
+  title: string;
+  preview: string;
+  component: SectionComponent;
+  props: { content?: string };
+}> = [
   {
     id: "quienes-somos",
     title: institucional["quienes-somos"]?.title || "¿Quiénes Somosoo?",

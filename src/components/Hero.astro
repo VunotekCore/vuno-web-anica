@@ -53,7 +53,7 @@ import HeroSlider from "../components/HeroSlider.astro";
         </div>
 
         <script>
-          let searchIndex = [];
+          let searchIndex: any[] = [];
 
           document.addEventListener("astro:page-load", () => {
             const searchInput = document.getElementById("search-input");
@@ -79,7 +79,7 @@ import HeroSlider from "../components/HeroSlider.astro";
 
             const handleFocus = () => loadIndex();
 
-            const handleInput = (e) => {
+            const handleInput = (e: Event) => {
               const query = (e.target as HTMLInputElement).value.toLowerCase();
 
               if (query.length < 2) {
@@ -87,7 +87,7 @@ import HeroSlider from "../components/HeroSlider.astro";
                 return;
               }
 
-              const results = searchIndex.filter((item) => {
+              const results = searchIndex.filter((item: any) => {
                 const title = item.title?.toLowerCase() || "";
                 const type = item.type?.toLowerCase() || "";
                 return title.includes(query) || type.includes(query);
@@ -124,7 +124,7 @@ import HeroSlider from "../components/HeroSlider.astro";
               }
             };
 
-            const handleClickOutside = (e) => {
+            const handleClickOutside = (e: Event) => {
               if (
                 !searchInput?.contains(e.target as Node) &&
                 !searchResults?.contains(e.target as Node)

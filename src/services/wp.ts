@@ -1,4 +1,4 @@
-import { bufferHeadContent } from 'astro/runtime/server/render/astro/render.js'
+
 
 const domain = import.meta.env.WP_DOMAIN || 'https://wp.anicasolucionesintegrales.com'
 const apiUrl = `${domain}/wp-json/wp/v2`
@@ -75,7 +75,8 @@ export const getPostInfo = async (slug: string) => {
 export const getPostsByCategory = async (category: string) => {
   const response = await fetch(`${apiUrlPostsCategories}/posts-by-category/${category}`)
   if (!response.ok) {
-    throw new Error('Failed to fetch posts by category')
+    console.error('Failed to fetch posts by category:', response.status, response.statusText)
+    return {}
   }
 
   const data = await response.json()
