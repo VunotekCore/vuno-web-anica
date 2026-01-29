@@ -146,7 +146,7 @@ const sections = [
 
 <script>
   // Modal functionality
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("astro:page-load", () => {
     const modalTriggers = document.querySelectorAll("[data-modal-target]");
     const modalCloses = document.querySelectorAll("[data-modal-close]");
     const modals = document.querySelectorAll("[data-modal]");
