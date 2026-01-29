@@ -27,3 +27,5 @@ pnpm-debug.log*
 vendor/
 composer.lock
 public/api/config.php
+AGENTS.md
+.agent/
