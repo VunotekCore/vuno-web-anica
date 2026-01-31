@@ -16,7 +16,7 @@
             <button
                 type="button"
                 id="btn-agendar"
-                class="form-type-btn hover:bg-primary/10 flex-1 rounded-lg border-2 border-primary bg-transparent px-6 py-3 font-bold text-primary transition-all"
+                class="form-type-btn hover:bg-primary/10 flex-1 rounded-lg border-2 bg-gradient-to-r from-[#515151] to-gray-700 px-6 py-3 font-bold text-white transition-all"
             >
                 Agendar Reunión
             </button>
@@ -339,7 +339,7 @@
             // deshabilitar boton durante  el envio
             if (submitButton) {
                 submitButton.disable /= true;
-                const originalText = submitText?.textContent;
+
                 if (submitText) {
                     submitText.textContent = "Enviando...";
                 }

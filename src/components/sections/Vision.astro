@@ -1,14 +1,15 @@
 ---
 interface Props {
-    content: string;
+    content?: string;
 }
 
 const { content } = Astro.props;
 // separar en dos partes el contenido usando como separador <!--more-->
-const parts = content.split("<!--more-->");
-//  0 contiene la parte introducatoria
-// 1 contiene la parte principal
-const mainContent = parts.length > 1 ? parts[1] : content;
+const mainContent = content
+    ? content.split("<!--more-->").length > 1
+        ? content.split("<!--more-->")[1]
+        : content
+    : "<p>Contenido no disponible</p>";
 ---
 
 <article class="prose prose-lg max-w-none lg:prose-xl">

@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import FloatingContact from "../components/FloatingContact.astro";
 import SEOHead from "../components/SEOHead.astro";
 import { ClientRouter } from 'astro:transitions';
 
@@ -38,7 +39,7 @@ const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
     <!-- Google Analytics -->
     {GA_MEASUREMENT_ID && (
       <>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
         <script is:inline define:vars={{ GA_MEASUREMENT_ID }}>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
@@ -51,5 +52,6 @@ const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
   </head>
   <body class="antialiased bg-white text-gray-900 flex flex-col min-h-screen">
     <slot />
+    <FloatingContact />
   </body>
 </html>

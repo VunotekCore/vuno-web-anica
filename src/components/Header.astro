@@ -16,6 +16,10 @@ const menuServices = {
     title: "Muebles Comerciales",
     href: "https://ik.imagekit.io/IV7VRclcnk/services-menu/BtnMueblesComerciales.svg?updatedAt=1768317728640",
   },
+  eventos: {
+    title: "Eventos",
+    href: "https://ik.imagekit.io/IV7VRclcnk/services-menu/BtnEventos.svg?updatedAt=1768317729000",
+  },
 };
 ---
 
@@ -33,24 +37,61 @@ const menuServices = {
     </div>
 
     <!-- Nav menu (Desktop) -->
-    <ul
-      class="hidden lg:flex items-center gap-4 xl:gap-8 text-lg xl:text-xl font-medium font-lobster"
-    >
-      <li>
-        <a href="/#quienes-somos" class="hover:text-primary transition"
-          >Quienes Somos</a
+    <!-- INSTITUCIONAL DROPDOWN - COMMENTED OUT TO PRESERVE CODE
+    <div class="hidden lg:flex items-center gap-4 xl:gap-8">
+      <div class="relative group">
+        <button
+          id="institucional-dropdown"
+          class="text-lg xl:text-xl font-medium font-lobster text-neutral hover:text-primary transition-all duration-300 flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-primary/5"
+          aria-expanded="false"
+          aria-haspopup="true"
         >
-      </li>
-      <li>
-        <a href="/#mision" class="hover:text-primary transition">Misión</a>
-      </li>
-      <li>
-        <a href="/#vision" class="hover:text-primary transition">Visión</a>
-      </li>
-      <li>
-        <a href="/#valores" class="hover:text-primary transition">Valores</a>
-      </li>
-    </ul>
+          Institucional
+          <svg
+            class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+          >
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </button>
+
+        <div
+          id="institucional-menu"
+          class="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-95 group-hover:scale-100 z-50"
+        >
+          <div class="py-2">
+            <a
+              href="/#quienes-somos"
+              class="block px-4 py-3 text-base font-montserrat text-neutral hover:bg-primary hover:text-white transition-all duration-200 first:rounded-t-xl"
+            >
+              Quienes Somos
+            </a>
+            <a
+              href="/#mision"
+              class="block px-4 py-3 text-base font-montserrat text-neutral hover:bg-primary hover:text-white transition-all duration-200"
+            >
+              Misión
+            </a>
+            <a
+              href="/#vision"
+              class="block px-4 py-3 text-base font-montserrat text-neutral hover:bg-primary hover:text-white transition-all duration-200"
+            >
+              Visión
+            </a>
+            <a
+              href="/#valores"
+              class="block px-4 py-3 text-base font-montserrat text-neutral hover:bg-primary hover:text-white transition-all duration-200 last:rounded-b-xl"
+            >
+              Valores
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    -->
 
     <!-- Services Row + Mobile Menu -->
     <div class="flex items-center gap-2">
@@ -59,7 +100,7 @@ const menuServices = {
         <!-- Card 1: Medios Visuales -->
         <a
           href="/servicios/medios-visuales"
-          class="flex flex-col items-center text-center relative hover:scale-105 transition-transform"
+          class="flex flex-col items-center text-center relative hover:scale-105 transition-transform group"
         >
           <div class="relative">
             <img
@@ -68,7 +109,7 @@ const menuServices = {
               alt="Medios Visuales"
             />
             <p
-              class="absolute inset-0 flex items-center justify-center text-[14px] font-medium leading-tight font-lobster text-white pointer-events-none"
+              class="absolute inset-0 flex items-center justify-center text-[14px] font-medium leading-tight font-lobster text-white pointer-events-none transition-all duration-300 group-hover:scale-110 group-hover:tracking-wider"
             >
               Medios<br />Visuales
             </p>
@@ -78,7 +119,7 @@ const menuServices = {
         <!-- Card 2: Diseño 3D -->
         <a
           href="/servicios/diseno-3d"
-          class="flex flex-col items-center text-center relative hover:scale-105 transition-transform"
+          class="flex flex-col items-center text-center relative hover:scale-105 transition-transform group"
         >
           <div class="relative">
             <img
@@ -87,7 +128,7 @@ const menuServices = {
               alt="Diseño 3D"
             />
             <p
-              class="absolute inset-0 flex items-center justify-center text-[14px] font-medium leading-tight font-lobster text-white pointer-events-none"
+              class="absolute inset-0 flex items-center justify-center text-[14px] font-medium leading-tight font-lobster text-white pointer-events-none transition-all duration-300 group-hover:scale-110 group-hover:tracking-wider"
             >
               Diseño<br />3D
             </p>
@@ -97,7 +138,7 @@ const menuServices = {
         <!-- Card 3: Web & Programación -->
         <a
           href="/servicios/web-programacion"
-          class="flex flex-col items-center text-center relative hover:scale-105 transition-transform"
+          class="flex flex-col items-center text-center relative hover:scale-105 transition-transform group"
         >
           <div class="relative">
             <img
@@ -106,7 +147,7 @@ const menuServices = {
               alt="Web & Programación"
             />
             <p
-              class="absolute inset-0 flex items-center justify-center text-[14px] font-medium leading-tight font-lobster text-white pointer-events-none"
+              class="absolute inset-0 flex items-center justify-center text-[14px] font-medium leading-tight font-lobster text-white pointer-events-none transition-all duration-300 group-hover:scale-110 group-hover:tracking-wider"
             >
               Web &<br />Programación
             </p>
@@ -116,7 +157,7 @@ const menuServices = {
         <!-- Card 4: Muebles Comerciales -->
         <a
           href="/servicios/muebles-comerciales"
-          class="flex flex-col items-center text-center relative hover:scale-105 transition-transform"
+          class="flex flex-col items-center text-center relative hover:scale-105 transition-transform group"
         >
           <div class="relative">
             <img
@@ -125,9 +166,28 @@ const menuServices = {
               alt="Muebles Comerciales"
             />
             <p
-              class="absolute inset-0 flex items-center justify-center text-[14px] font-medium leading-tight font-lobster text-white pointer-events-none"
+              class="absolute inset-0 flex items-center justify-center text-[14px] font-medium leading-tight font-lobster text-white pointer-events-none transition-all duration-300 group-hover:scale-110 group-hover:tracking-wider"
             >
               Muebles<br />Comerciales
+            </p>
+          </div>
+        </a>
+
+        <!-- Card 5: Eventos -->
+        <a
+          href="/servicios/eventos"
+          class="flex flex-col items-center text-center relative hover:scale-105 transition-transform group"
+        >
+          <div class="relative">
+            <img
+              src={menuServices.eventos.href}
+              class="w-20 h-20 lg:w-26 lg:h-26"
+              alt="Eventos"
+            />
+            <p
+              class="absolute inset-0 flex items-center justify-center text-[14px] font-medium leading-tight font-lobster text-white pointer-events-none transition-all duration-300 group-hover:scale-110 group-hover:tracking-wider"
+            >
+              Eventos
             </p>
           </div>
         </a>

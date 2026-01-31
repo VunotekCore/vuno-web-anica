@@ -36,7 +36,7 @@ const seoConfig = {
     <main class="w-full">
         <!-- Hero Section -->
         <section
-            class="w-full py-16 md:py-24 bg-gradient-to-br from-secondary/5 to-white"
+            class="w-full py-16 md:py-24 bg-gradient-to-br from-accent/5 to-white"
         >
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
@@ -44,11 +44,11 @@ const seoConfig = {
                         class="text-4xl md:text-6xl font-bold text-neutral mb-4"
                     >
                         <span class="font-lobster">Diseño Gráfico</span>
-                        <span class="text-secondary text-5xl md:text-7xl">
+                        <span class="text-accent-dark text-5xl md:text-7xl">
                             &
                         </span>
                         <span
-                            class="font-lobster text-3xl md:text-5xl text-secondary-dark italic"
+                            class="font-lobster text-3xl md:text-5xl text-accent-dark italic"
                             >Modelado 3D</span
                         >
                     </h1>
@@ -57,10 +57,10 @@ const seoConfig = {
                     >
                         El diseño gráfico y el modelado 3D trabajan en sinergia
                         para crear experiencias visuales impactantes. Desde la <span
-                            class="font-semibold text-secondary"
+                            class="font-bold text-accent-dark"
                             >identidad corporativa</span
                         > hasta
-                        <span class="font-semibold text-accent"
+                        <span class="font-bold text-accent-dark"
                             >renders fotorrealistas</span
                         >, transformamos ideas en realidades visuales que
                         conectan con tu audiencia y elevan tu marca.
@@ -150,13 +150,13 @@ const seoConfig = {
 
                 <!-- Modelado 3D & Renderizado - Special Subsection -->
                 <div
-                    class="bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl p-8 md:p-12 mb-12"
+                    class="bg-gradient-to-br from-accent/10 to-secondary/10 rounded-2xl p-8 md:p-12 mb-12"
                 >
                     <h2
                         class="text-3xl md:text-4xl font-bold text-neutral mb-4 font-lobster flex items-center gap-3"
                     >
                         <svg
-                            class="w-10 h-10 text-accent"
+                            class="w-10 h-10 text-primary"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -184,10 +184,10 @@ const seoConfig = {
 
                     <!-- Combined Modelado 3D Image: Appears as one cohesive visual -->
                     <div
-                        class="bg-gradient-to-br from-secondary/5 to-accent/5 rounded-xl p-8 border-2 border-gray-200 hover:border-secondary transition-all duration-300 hover:shadow-xl"
+                        class="bg-gradient-to-br from-primary/5 to-accent/5 rounded-xl p-8 border-2 border-gray-200 hover:border-accent transition-all duration-300 hover:shadow-xl"
                     >
                         <div
-                            class="bg-gradient-to-br from-secondary/20 to-accent/20 rounded-lg mb-4 flex flex-col items-center justify-center overflow-hidden"
+                            class="bg-gradient-to-br from-accent/20 to-primary/20 rounded-lg mb-4 flex flex-col items-center justify-center overflow-hidden"
                         >
                             <div
                                 class="flex flex-row items-center justify-center w-full"
@@ -217,7 +217,7 @@ const seoConfig = {
                     </div>
                     <!-- Texto puente -->
                     <p
-                        class="text-lg text-neutral-light font-montserrat leading-relaxed mb-10 italic border-l-4 border-accent pl-5"
+                        class="text-lg text-neutral-light font-montserrat leading-relaxed mb-10 italic border-l-4 border-accent-dark pl-5"
                     >
                         Desde visualizaciones arquitectónicas hasta renders de
                         producto y stands comerciales, creamos experiencias que
@@ -226,10 +226,10 @@ const seoConfig = {
 
                     <!-- Featured Image: 3D Rendering -->
                     <div
-                        class="bg-white rounded-xl p-8 border-2 border-accent hover:border-primary transition-all duration-300 hover:shadow-xl mb-8"
+                        class="bg-white rounded-xl p-8 border-2 border-accent-dark hover:border-accent transition-all duration-300 hover:shadow-xl mb-8"
                     >
                         <div
-                            class="aspect-video bg-gradient-to-br from-accent/20 to-primary/20 rounded-lg mb-4 flex items-center justify-center overflow-hidden"
+                            class="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg mb-4 flex items-center justify-center overflow-hidden"
                         >
                             <img
                                 src={services[1].image}
@@ -265,10 +265,10 @@ const seoConfig = {
 
                     <!-- Featured Image: Packaging -->
                     <div
-                        class="bg-gradient-to-br from-secondary/5 to-accent/5 rounded-xl p-8 border-2 border-gray-200 hover:border-secondary transition-all duration-300 hover:shadow-xl"
+                        class="bg-gradient-to-br from-accent/5 to-primary/5 rounded-xl p-8 border-2 border-gray-200 hover:border-accent transition-all duration-300 hover:shadow-xl"
                     >
                         <div
-                            class="aspect-video bg-gradient-to-br from-secondary/20 to-accent/20 rounded-lg mb-4 flex items-center justify-center"
+                            class="aspect-video bg-gradient-to-br from-accent/20 to-primary/20 rounded-lg mb-4 flex items-center justify-center"
                         >
                             <img
                                 src={services[2].image}
@@ -285,7 +285,7 @@ const seoConfig = {
                 </div>
                 <!-- CTA Section -->
                 <div
-                    class="mt-16 text-center bg-gradient-to-r from-secondary/10 via-accent/10 to-primary/10 rounded-2xl p-12"
+                    class="mt-16 text-center bg-gradient-to-r from-accent/10 via-primary/10 to-secondary/10 rounded-2xl p-12"
                 >
                     <h3
                         class="text-3xl font-bold text-neutral mb-4 font-lobster"
@@ -300,7 +300,7 @@ const seoConfig = {
                     </p>
                     <a
                         href="/contacto"
-                        class="inline-block bg-secondary hover:bg-secondary-dark text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg font-montserrat"
+                        class="inline-block bg-accent hover:bg-accent-dark text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg font-montserrat"
                     >
                         Iniciar Proyecto
                     </a>

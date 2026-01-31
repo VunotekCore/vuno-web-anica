@@ -1,0 +1,82 @@
+---
+
+---
+
+<!-- Floating Contact Buttons -->
+<div class="fixed bottom-6 right-6 z-50 flex flex-col gap-4">
+    <!-- Email/Contact Button (arriba) -->
+    <a
+        href="/contacto"
+        class="group flex items-center justify-center hover:scale-110 hover:shadow-xl transition-all duration-500 border border-white/10 animate-float bg-white rounded-full p-2 shadow-lg"
+        style="animation-delay: 0.2s"
+        aria-label="Escríbenos por correo o agenda una cita"
+    >
+        <!-- Icono de correo en naranja corporativo -->
+        <svg
+            width="36"
+            height="36"
+            class="w-7 h-7 md:w-16 md:h-16 drop-shadow-lg"
+            fill="#F15A24"
+            viewBox="0 0 24 24"
+        >
+            <path
+                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+            ></path>
+        </svg>
+
+        <!-- Tooltip -->
+        <span
+            class="absolute right-full mr-4 top-1/2 -translate-y-1/2
+           px-4 py-2 bg-primary text-white text-sm rounded-2xl
+           opacity-0 group-hover:opacity-100 pointer-events-none
+           transition-opacity duration-300 whitespace-nowrap
+           before:absolute before:left-full before:top-1/2 before:-translate-y-1/2
+           before:border-8 before:border-transparent before:border-l-primary"
+        >
+            Escríbenos por correo o agenda una cita
+        </span>
+    </a>
+
+    <!-- WhatsApp Button (abajo) -->
+    <a
+        href="https://wa.me/50577776363?text=¡Hola!%20Vengo%20de%20tu%20web%20y%20me%20gustaría%20hablar%20contigo%20%F0%9F%98%8A"
+        target="_blank"
+        rel="noopener"
+        class="group flex items-center justify-center hover:scale-110 hover:shadow-xl transition-all duration-500 border border-white/10 animate-float bg-white rounded-full p-2 shadow-lg"
+        aria-label="Chatea por WhatsApp"
+    >
+        <!-- Icono WhatsApp en verde corporativo -->
+        <svg
+            width="36"
+            height="36"
+            class="w-7 h-7 md:w-16 md:h-16 drop-shadow-lg"
+            fill="#3EA530"
+        >
+            <use xlink:href="/assets/sprite.svg#wp"></use>
+        </svg>
+
+        <!-- Pulse indicator -->
+        <span class="absolute -top-0.1 -right-0.5">
+            <span class="relative flex h-6 w-6">
+                <span
+                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary/50"
+                ></span>
+                <span
+                    class="relative inline-flex rounded-full h-2 w-2 bg-secondary"
+                ></span>
+            </span>
+        </span>
+
+        <!-- Tooltip -->
+        <span
+            class="absolute right-full mr-4 top-1/2 -translate-y-1/2
+           px-4 py-2 bg-secondary text-white text-sm rounded-2xl
+           opacity-0 group-hover:opacity-100 pointer-events-none
+           transition-opacity duration-300 whitespace-nowrap
+           before:absolute before:left-full before:top-1/2 before:-translate-y-1/2
+           before:border-8 before:border-transparent before:border-l-secondary"
+        >
+            ¡Hablemos por WhatsApp!
+        </span>
+    </a>
+</div>
