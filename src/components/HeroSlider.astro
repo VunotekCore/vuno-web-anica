@@ -64,9 +64,19 @@ const slidesIMG: Slide[] = (await getSliderFromImageKit())
     private radius: number = 500;
     private autoplayInterval: number | null = null;
     private isAnimating: boolean = false;
+    private prevBtnHandler: (() => void) | null = null;
+    private nextBtnHandler: (() => void) | null = null;
+    private keydownHandler: ((e: KeyboardEvent) => void) | null = null;
+    private mouseenterHandler: (() => void) | null = null;
+    private mouseleaveHandler: (() => void) | null = null;
+    private mousedownHandler: ((e: MouseEvent) => void) | null = null;
+    private mousemoveHandler: ((e: MouseEvent) => void) | null = null;
+    private mouseupHandler: (() => void) | null = null;
 
     constructor(carouselId: string) {
       this.carousel = document.getElementById(carouselId) as HTMLElement;
+      if (!this.carousel) return;
+
       this.items = this.carousel.querySelectorAll(".carousel-item");
       this.totalItems = this.items.length;
 
@@ -151,14 +161,18 @@ const slidesIMG: Slide[] = (await getSliderFromImageKit())
       const prevBtn = document.getElementById("prevBtn");
       const nextBtn = document.getElementById("nextBtn");
 
-      prevBtn?.addEventListener("click", () => this.prev());
-      nextBtn?.addEventListener("click", () => this.next());
+      this.prevBtnHandler = () => this.prev();
+      this.nextBtnHandler = () => this.next();
+
+      prevBtn?.addEventListener("click", this.prevBtnHandler);
+      nextBtn?.addEventListener("click", this.nextBtnHandler);
 
       // Keyboard navigation
-      document.addEventListener("keydown", (e) => {
+      this.keydownHandler = (e: KeyboardEvent) => {
         if (e.key === "ArrowLeft") this.prev();
         if (e.key === "ArrowRight") this.next();
-      });
+      };
+      document.addEventListener("keydown", this.keydownHandler);
     }
 
     startAutoplay() {
@@ -179,19 +193,22 @@ const slidesIMG: Slide[] = (await getSliderFromImageKit())
         ".carousel-3d-container",
       ) as HTMLElement;
 
-      container?.addEventListener("mouseenter", () => this.stopAutoplay());
-      container?.addEventListener("mouseleave", () => this.startAutoplay());
+      this.mouseenterHandler = () => this.stopAutoplay();
+      this.mouseleaveHandler = () => this.startAutoplay();
+
+      container?.addEventListener("mouseenter", this.mouseenterHandler);
+      container?.addEventListener("mouseleave", this.mouseleaveHandler);
 
       // Mouse drag to rotate
       let isDragging = false;
       let startX = 0;
 
-      container?.addEventListener("mousedown", (e) => {
+      this.mousedownHandler = (e: MouseEvent) => {
         isDragging = true;
         startX = e.clientX;
-      });
+      };
 
-      document.addEventListener("mousemove", (e) => {
+      this.mousemoveHandler = (e: MouseEvent) => {
         if (!isDragging) return;
         const deltaX = e.clientX - startX;
         if (Math.abs(deltaX) > 50) {
@@ -202,17 +219,76 @@ const slidesIMG: Slide[] = (await getSliderFromImageKit())
           }
           isDragging = false;
         }
-      });
+      };
 
-      document.addEventListener("mouseup", () => {
+      this.mouseupHandler = () => {
         isDragging = false;
-      });
+      };
+
+      container?.addEventListener("mousedown", this.mousedownHandler);
+      document.addEventListener("mousemove", this.mousemoveHandler);
+      document.addEventListener("mouseup", this.mouseupHandler);
+    }
+
+    // Cleanup method to remove all event listeners and stop autoplay
+    destroy() {
+      this.stopAutoplay();
+
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const container = document.querySelector(
+        ".carousel-3d-container",
+      ) as HTMLElement;
+
+      if (this.prevBtnHandler)
+        prevBtn?.removeEventListener("click", this.prevBtnHandler);
+      if (this.nextBtnHandler)
+        nextBtn?.removeEventListener("click", this.nextBtnHandler);
+      if (this.keydownHandler)
+        document.removeEventListener("keydown", this.keydownHandler);
+      if (this.mouseenterHandler)
+        container?.removeEventListener("mouseenter", this.mouseenterHandler);
+      if (this.mouseleaveHandler)
+        container?.removeEventListener("mouseleave", this.mouseleaveHandler);
+      if (this.mousedownHandler)
+        container?.removeEventListener("mousedown", this.mousedownHandler);
+      if (this.mousemoveHandler)
+        document.removeEventListener("mousemove", this.mousemoveHandler);
+      if (this.mouseupHandler)
+        document.removeEventListener("mouseup", this.mouseupHandler);
     }
   }
 
-  // Initialize carousel when DOM is ready
-  document.addEventListener("DOMContentLoaded", () => {
-    new Carousel3D("carousel3d");
+  // Store carousel instance globally for cleanup
+  let carouselInstance: Carousel3D | null = null;
+
+  // Initialize carousel
+  function initCarousel() {
+    // Clean up previous instance if it exists
+    if (carouselInstance) {
+      carouselInstance.destroy();
+      carouselInstance = null;
+    }
+
+    // Create new instance
+    const carouselElement = document.getElementById("carousel3d");
+    if (carouselElement) {
+      carouselInstance = new Carousel3D("carousel3d");
+    }
+  }
+
+  // Initialize on first load
+  document.addEventListener("DOMContentLoaded", initCarousel);
+
+  // Reinitialize on Astro page navigation (View Transitions)
+  document.addEventListener("astro:page-load", initCarousel);
+
+  // Cleanup before navigation
+  document.addEventListener("astro:before-preparation", () => {
+    if (carouselInstance) {
+      carouselInstance.destroy();
+      carouselInstance = null;
+    }
   });
 </script>
 

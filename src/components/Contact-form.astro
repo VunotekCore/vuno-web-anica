@@ -9,14 +9,14 @@
             <button
                 type="button"
                 id="btn-cotizar"
-                class="form-type-btn active hover:bg-primary/90 flex-1 rounded-lg border-2 border-primary bg-neutral-light px-6 py-3 font-bold text-white transition-all"
+                class="form-type-btn active flex-1 rounded-lg border-2 border-neutral-light bg-neutral-light px-6 py-3 font-bold text-white transition-all hover:bg-neutral hover:text-white"
             >
                 Cotizar Proyecto
             </button>
             <button
                 type="button"
                 id="btn-agendar"
-                class="form-type-btn hover:bg-primary/10 flex-1 rounded-lg border-2 border-neutral-light bg-white px-6 py-3 font-bold text-neutral-light transition-all"
+                class="form-type-btn flex-1 rounded-lg border-2 border-neutral-light bg-white px-6 py-3 font-bold text-neutral-light transition-all hover:bg-neutral-light hover:text-white"
             >
                 Agendar Reunión
             </button>
@@ -264,10 +264,22 @@
         const submitText = document.getElementById("submit-text");
 
         function switchToQuote() {
-            btnCotizar?.classList.add("active", "bg-primary", "text-white");
-            btnCotizar?.classList.remove("bg-transparent", "text-primary");
-            btnAgendar?.classList.remove("active", "bg-primary", "text-white");
-            btnAgendar?.classList.add("bg-transparent", "text-primary");
+            // Activar botón Cotizar (Gris sólido)
+            btnCotizar?.classList.add(
+                "active",
+                "bg-neutral-light",
+                "text-white",
+            );
+            btnCotizar?.classList.remove("bg-white", "text-neutral-light");
+
+            // Desactivar botón Agendar (Blanco con borde gris)
+            btnAgendar?.classList.remove(
+                "active",
+                "bg-neutral-light",
+                "text-white",
+            );
+            btnAgendar?.classList.add("bg-white", "text-neutral-light");
+
             cotizarFields?.classList.remove("hidden");
             agendarFields?.classList.add("hidden");
             if (formTypeInput) formTypeInput.value = "cotizar";
@@ -289,10 +301,22 @@
         }
 
         function switchToSchedule() {
-            btnAgendar?.classList.add("active", "bg-primary", "text-white");
-            btnAgendar?.classList.remove("bg-transparent", "text-primary");
-            btnCotizar?.classList.remove("active", "bg-primary", "text-white");
-            btnCotizar?.classList.add("bg-transparent", "text-primary");
+            // Activar botón Agendar (Gris sólido)
+            btnAgendar?.classList.add(
+                "active",
+                "bg-neutral-light",
+                "text-white",
+            );
+            btnAgendar?.classList.remove("bg-white", "text-neutral-light");
+
+            // Desactivar botón Cotizar (Blanco con borde gris)
+            btnCotizar?.classList.remove(
+                "active",
+                "bg-neutral-light",
+                "text-white",
+            );
+            btnCotizar?.classList.add("bg-white", "text-neutral-light");
+
             agendarFields?.classList.remove("hidden");
             cotizarFields?.classList.add("hidden");
             if (formTypeInput) formTypeInput.value = "agendar";
