@@ -111,13 +111,14 @@ const seoConfig = {
                     </div>
 
                     <div
-                        class="flex flex-col items-center gap-4 rounded-lg border-2 border-gray-200 hover:border-accent bg-gray-50 p-6 transition-all duration-300 hover:shadow-lg"
+                        id="location-card"
+                        class="flex flex-col items-center gap-4 rounded-lg border-2 border-gray-200 hover:border-accent bg-gray-50 p-6 transition-all duration-300 hover:shadow-lg cursor-pointer hover:scale-[1.02] group"
                     >
                         <div
-                            class="rounded-full border-2 border-accent bg-accent/10 p-4"
+                            class="rounded-full border-2 border-accent bg-accent/10 p-4 group-hover:bg-accent group-hover:text-white transition-colors"
                         >
                             <svg
-                                class="w-8 h-8 text-accent"
+                                class="w-8 h-8 text-accent group-hover:text-white transition-colors"
                                 fill="currentColor"
                                 viewBox="0 0 64 64"
                             >
@@ -138,4 +139,66 @@ const seoConfig = {
         </section>
     </main>
     <Footer />
+
+    <!-- Map Modal -->
+    <!-- centrar este dialog modal -->
+    <dialog
+        id="map-modal"
+        class="backdrop:bg-black/50 overflow-hidden rounded-xl p-0 shadow-2xl backdrop:backdrop-blur-sm m-auto fixed inset-0 max-w-[90vw] max-h-[90vh]"
+    >
+        <div class="bg-white relative h-[450px] w-[600px] max-w-full">
+            <button
+                id="close-map-btn"
+                class="text-neutral hover:text-primary absolute right-4 top-4 z-10 rounded-full bg-white p-2 shadow-md transition-colors"
+            >
+                <svg
+                    class="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    ><path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path></svg
+                >
+            </button>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d445.0827411115972!2d-86.29618682380324!3d12.139341122065856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f71579323530715%3A0x5b4551843b43a878!2sANICA%20SOLUCIONES%20INTEGRALES!5e0!3m2!1sen!2sni!4v1770654105190!5m2!1sen!2sni"
+                width="600"
+                height="450"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </dialog>
+
+    <script>
+        const mapModal = /** @type {any} */ (
+            document.getElementById("map-modal")
+        );
+        const locationCard = document.getElementById("location-card");
+        const closeMapBtn = document.getElementById("close-map-btn");
+
+        locationCard?.addEventListener("click", () => {
+            mapModal?.showModal();
+        });
+
+        closeMapBtn?.addEventListener("click", () => {
+            mapModal?.close();
+        });
+
+        mapModal?.addEventListener("click", (/** @type {any} */ e) => {
+            const dialogDimensions = mapModal.getBoundingClientRect();
+            if (
+                e.clientX < dialogDimensions.left ||
+                e.clientX > dialogDimensions.right ||
+                e.clientY < dialogDimensions.top ||
+                e.clientY > dialogDimensions.bottom
+            ) {
+                mapModal.close();
+            }
+        });
+    </script>
 </DefaultLayout>
