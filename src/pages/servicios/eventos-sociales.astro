@@ -1,0 +1,294 @@
+---
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+// Sample event products - replace with actual images from ImageKit or local assets
+const eventProducts = [
+    {
+        id: 1,
+        name: "Mesa de Bienvenida Personalizada",
+        category: "Bodas",
+        image: "https://ik.imagekit.io/IV7VRclcnk/eventos/welcome-table.webp?updatedAt=1770655440784",
+        description: "Señalética elegante para eventos especiales",
+    },
+    {
+        id: 2,
+        name: "Señalización de Eventos Corporativos",
+        category: "Corporativo",
+        image: "https://ik.imagekit.io/IV7VRclcnk/eventos/corporate-signage.webp?updatedAt=1770655440784",
+        description: "Rotulación profesional para eventos empresariales",
+    },
+    {
+        id: 3,
+        name: "Decoración de Mesas Temáticas",
+        category: "Fiestas",
+        image: "https://ik.imagekit.io/IV7VRclcnk/eventos/table-decor.webp?updatedAt=1770655440784",
+        description: "Elementos decorativos personalizados",
+    },
+    {
+        id: 4,
+        name: "Photobooth Personalizado",
+        category: "Bodas",
+        image: "https://ik.imagekit.io/IV7VRclcnk/eventos/photobooth.webp?updatedAt=1770655440784",
+        description: "Fondos y props para fotografías memorables",
+    },
+    {
+        id: 5,
+        name: "Menús y Tarjetas de Mesa",
+        category: "Bodas",
+        image: "https://ik.imagekit.io/IV7VRclcnk/eventos/menu-cards.webp?updatedAt=1770655440784",
+        description: "Papelería elegante para eventos",
+    },
+    {
+        id: 6,
+        name: "Stands Promocionales",
+        category: "Corporativo",
+        image: "https://ik.imagekit.io/IV7VRclcnk/eventos/promo-stands.webp?updatedAt=1770655440784",
+        description: "Displays para ferias y exposiciones",
+    },
+    {
+        id: 7,
+        name: "Centros de Mesa Personalizados",
+        category: "Fiestas",
+        image: "https://ik.imagekit.io/IV7VRclcnk/eventos/centerpieces.webp?updatedAt=1770655440784",
+        description: "Decoración central para mesas de eventos",
+    },
+    {
+        id: 8,
+        name: "Señalética Direccional",
+        category: "Corporativo",
+        image: "https://ik.imagekit.io/IV7VRclcnk/eventos/directional-signs.webp?updatedAt=1770655440784",
+        description: "Guías visuales para eventos grandes",
+    },
+    {
+        id: 9,
+        name: "Backdrop Personalizado",
+        category: "Bodas",
+        image: "https://ik.imagekit.io/IV7VRclcnk/eventos/backdrop.webp?updatedAt=1770655440784",
+        description: "Fondos impresos para ceremonias",
+    },
+];
+
+const seoConfig = {
+    title: "Eventos Sociales - Productos para Bodas, Fiestas y Eventos Corporativos | Anica",
+    description:
+        "Descubre nuestros productos personalizados para eventos sociales: señalética para bodas, decoración para fiestas, stands corporativos y más. Hacemos tu evento memorable.",
+    keywords:
+        "eventos sociales Nicaragua, bodas personalizadas, decoración eventos, señalética bodas, stands corporativos, photobooth, menús personalizados, eventos empresariales",
+};
+---
+
+<DefaultLayout {...seoConfig}>
+    <Header />
+
+    <main class="w-full">
+        <!-- Hero Section -->
+        <section
+            class="w-full py-16 md:py-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-white relative overflow-hidden"
+        >
+            <!-- Background decorative elements -->
+            <div class="absolute inset-0 opacity-5">
+                <div class="absolute top-20 left-10 w-64 h-64 bg-primary rounded-full blur-3xl"></div>
+                <div class="absolute bottom-20 right-10 w-80 h-80 bg-secondary rounded-full blur-3xl"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-12">
+                    <h1
+                        class="text-4xl md:text-6xl font-bold text-neutral mb-6 font-lobster"
+                    >
+                        Eventos <span class="text-primary">Sociales</span>
+                    </h1>
+                    <p
+                        class="text-lg md:text-xl text-neutral-light font-montserrat max-w-4xl mx-auto leading-relaxed"
+                    >
+                        Transformamos tus eventos en experiencias inolvidables con productos personalizados de alta calidad. Desde bodas elegantes hasta eventos corporativos profesionales.
+                    </p>
+                </div>
+
+                <!-- Category Pills -->
+                <div class="flex flex-wrap justify-center gap-3 mb-8">
+                    <button
+                        class="category-filter px-6 py-2 rounded-full bg-primary text-white font-montserrat font-semibold transition-all duration-300 hover:bg-primary-dark hover:shadow-lg"
+                        data-category="all"
+                    >
+                        Todos
+                    </button>
+                    <button
+                        class="category-filter px-6 py-2 rounded-full bg-white border-2 border-gray-200 text-neutral font-montserrat font-semibold transition-all duration-300 hover:border-primary hover:text-primary"
+                        data-category="Bodas"
+                    >
+                        Bodas
+                    </button>
+                    <button
+                        class="category-filter px-6 py-2 rounded-full bg-white border-2 border-gray-200 text-neutral font-montserrat font-semibold transition-all duration-300 hover:border-primary hover:text-primary"
+                        data-category="Corporativo"
+                    >
+                        Corporativo
+                    </button>
+                    <button
+                        class="category-filter px-6 py-2 rounded-full bg-white border-2 border-gray-200 text-neutral font-montserrat font-semibold transition-all duration-300 hover:border-primary hover:text-primary"
+                        data-category="Fiestas"
+                    >
+                        Fiestas
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="w-full py-16 md:py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Masonry Grid -->
+                <div
+                    id="gallery-grid"
+                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+                >
+                    {
+                        eventProducts.map((product, index) => (
+                            <div
+                                class="product-card group bg-white rounded-xl overflow-hidden border-2 border-gray-100 hover:border-primary/60 hover:shadow-2xl transition-all duration-500 cursor-pointer animate-fade-in"
+                                style={`animation-delay: ${index * 50}ms`}
+                                data-category={product.category}
+                            >
+                                <!-- Image Container -->
+                                <div class="relative aspect-[4/3] bg-gradient-to-br from-primary/5 to-secondary/5 overflow-hidden">
+                                    <img
+                                        src={product.image}
+                                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        alt={product.name}
+                                        loading="lazy"
+                                    />
+                                    
+                                    <!-- Category Badge -->
+                                    <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
+                                        <span class="text-xs font-semibold text-primary font-montserrat">
+                                            {product.category}
+                                        </span>
+                                    </div>
+
+                                    <!-- Overlay on hover -->
+                                    <div class="absolute inset-0 bg-gradient-to-t from-neutral/80 via-neutral/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                                        <div class="text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                            <p class="text-sm font-montserrat mb-1">
+                                                {product.description}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Content -->
+                                <div class="p-5">
+                                    <h3 class="font-montserrat font-bold text-neutral text-lg mb-2 group-hover:text-primary transition-colors">
+                                        {product.name}
+                                    </h3>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+
+                <!-- Empty State (hidden by default) -->
+                <div
+                    id="empty-state"
+                    class="hidden text-center py-20"
+                >
+                    <svg class="w-24 h-24 mx-auto mb-4 text-neutral-light" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
+                    </svg>
+                    <p class="text-xl text-neutral-light font-montserrat">
+                        No se encontraron productos en esta categoría
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="w-full py-16 md:py-20 bg-gradient-to-br from-primary/10 via-secondary/10 to-primary/10">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2
+                    class="text-3xl md:text-5xl font-bold text-neutral mb-6 font-lobster"
+                >
+                    ¿Listo para hacer tu evento inolvidable?
+                </h2>
+                <p
+                    class="text-lg md:text-xl text-neutral-light font-montserrat mb-10 max-w-2xl mx-auto"
+                >
+                    Trabajamos contigo para crear productos personalizados que reflejen la esencia de tu evento especial.
+                </p>
+                <a
+                    href="/contacto"
+                    class="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark text-white font-bold text-lg px-10 py-5 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl font-montserrat shadow-xl group"
+                >
+                    Solicitar Cotización
+                    <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </a>
+            </div>
+        </section>
+    </main>
+    <Footer />
+</DefaultLayout>
+
+<script>
+    // Category filtering functionality
+    document.addEventListener("astro:page-load", () => {
+        const filterButtons = document.querySelectorAll(".category-filter");
+        const productCards = document.querySelectorAll(".product-card");
+        const emptyState = document.getElementById("empty-state");
+
+        filterButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const category = button.getAttribute("data-category");
+
+                // Update active button
+                filterButtons.forEach((btn) => {
+                    btn.classList.remove("bg-primary", "text-white");
+                    btn.classList.add("bg-white", "border-2", "border-gray-200", "text-neutral");
+                });
+                button.classList.remove("bg-white", "border-2", "border-gray-200", "text-neutral");
+                button.classList.add("bg-primary", "text-white");
+
+                // Filter products
+                let visibleCount = 0;
+                productCards.forEach((card) => {
+                    const cardCategory = card.getAttribute("data-category");
+                    if (category === "all" || cardCategory === category) {
+                        card.classList.remove("hidden");
+                        visibleCount++;
+                    } else {
+                        card.classList.add("hidden");
+                    }
+                });
+
+                // Show/hide empty state
+                if (visibleCount === 0 && emptyState) {
+                    emptyState.classList.remove("hidden");
+                } else if (emptyState) {
+                    emptyState.classList.add("hidden");
+                }
+            });
+        });
+    });
+</script>
+
+<style>
+    /* Fade in animation for product cards */
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in {
+        animation: fade-in 0.6s ease-out forwards;
+        opacity: 0;
+    }
+</style>
