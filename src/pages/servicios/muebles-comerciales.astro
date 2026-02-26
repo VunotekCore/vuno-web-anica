@@ -8,71 +8,99 @@ const mueblesIMG = [
         id: 1,
         name: "MUEBLES DE PISO",
         image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/7.webp",
+
+        hash: "muebles-piso",
     },
     {
         id: 2,
         name: "MUEBLES DE PISO",
         image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/39.webp",
+
+        hash: "muebles-piso",
     },
     {
         id: 3,
         name: "MUEBLES DE PISO",
         image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/MUEBLE%20PISO%201.webp",
+
+        hash: "muebles-piso",
     },
     {
         id: 4,
         name: "ACTIVACIÓN ARCO",
         image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/3.webp",
+
+        hash: "activacion-arco",
     },
     {
         id: 5,
         name: "ISLA ESPECIAL",
         image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/ISLA%20YUMMIES.webp",
+
+        hash: "isla-especial",
     },
     {
         id: 6,
         name: "ISLA ESPECIAL (VARIANTE)",
         image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/8.webp",
+
+        hash: "isla-especial",
     },
     {
         id: 7,
         name: "MUEBLE TIPO CABECERA",
         image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/2.webp",
+
+        hash: "cabecera",
     },
     {
         id: 8,
         name: "MUEBLE PUNTA DE GÓNDOLA",
         image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/1.webp",
+
+        hash: "punta-gondola",
     },
     {
         id: 9,
         name: "MUEBLE TV / ENTRETENIMIENTO",
         image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/55.webp",
+
+        hash: "mueble-tv",
     },
     {
         id: 10,
         name: "MUEBLE ESTANTERÍA",
         image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/57.webp",
+
+        hash: "estanteria",
     },
     {
         id: 11,
         name: "ESCRITORIO MODULAR",
         image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/56.webp",
+
+        hash: "escritorio",
     },
     {
         id: 12,
         name: "EXHIBIDOR",
         image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/62.webp",
+
+        hash: "exhibidor-pvc",
     },
     {
         id: 13,
         name: "ISLA",
         image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/63.webp",
+
+        hash: "isla-especial",
     },
     {
         id: 14,
         name: "BARRA BAR",
         image: "https://ik.imagekit.io/IV7VRclcnk/muebles_comerciales/61.webp",
+
+        hash: "barra-bar",
     },
 ];
 
@@ -103,7 +131,7 @@ const seoConfig = {
                             >&</span
                         >
                         <span
-                            class="font-lobster text-3xl md:text-5xl text-premium-light italic"
+                            class="font-lobster text-3xl md:text-5xl text-premium-light"
                             >Hogar</span
                         >
                     </h1>
@@ -190,7 +218,10 @@ const seoConfig = {
                             [3, 4, 5, 6, 7].map((idx) => {
                                 const item = mueblesIMG[idx];
                                 return (
-                                    <div class="group bg-gray-50/60 rounded-xl overflow-hidden border border-gray-200 hover:border-premium/60 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                    <div
+                                        id={item.hash}
+                                        class="group bg-gray-50/60 rounded-xl overflow-hidden border border-gray-200 hover:border-premium/60 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                                    >
                                         <div class="aspect-square bg-gradient-to-br from-premium/5 to-secondary/5 flex items-center justify-center p-6 md:p-8">
                                             <img
                                                 src={item.image}
@@ -231,7 +262,10 @@ const seoConfig = {
                             [8, 9, 10].map((idx) => {
                                 const item = mueblesIMG[idx];
                                 return (
-                                    <div class="group bg-gradient-to-br from-secondary/5 to-premium/5 rounded-2xl overflow-hidden border border-gray-200 hover:border-premium transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                                    <div
+                                        id={item.hash}
+                                        class="group bg-gradient-to-br from-secondary/5 to-premium/5 rounded-2xl overflow-hidden border border-gray-200 hover:border-premium transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+                                    >
                                         <div class="aspect-square p-8 md:p-10 flex items-center justify-center bg-white/60">
                                             <img
                                                 src={item.image}
@@ -270,7 +304,10 @@ const seoConfig = {
                         [11, 12, 13].map((idx) => {
                             const item = mueblesIMG[idx];
                             return (
-                                <div class="group bg-gray-50/60 rounded-xl overflow-hidden border border-gray-200 hover:border-premium/60 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                <div
+                                    id={item.hash}
+                                    class="group bg-gray-50/60 rounded-xl overflow-hidden border border-gray-200 hover:border-premium/60 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                                >
                                     <div class="aspect-square bg-gradient-to-br from-premium/5 to-secondary/5 flex items-center justify-center p-6 md:p-8">
                                         <img
                                             src={item.image}

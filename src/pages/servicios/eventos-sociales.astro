@@ -11,6 +11,8 @@ const eventProducts = [
         category: "Bodas",
         image: "https://ik.imagekit.io/IV7VRclcnk/eventos/welcome-table.webp?updatedAt=1770655440784",
         description: "Señalética elegante para eventos especiales",
+    
+        hash: "mesa-bienvenida",
     },
     {
         id: 2,
@@ -18,6 +20,8 @@ const eventProducts = [
         category: "Corporativo",
         image: "https://ik.imagekit.io/IV7VRclcnk/eventos/corporate-signage.webp?updatedAt=1770655440784",
         description: "Rotulación profesional para eventos empresariales",
+    
+        hash: "senalizacion-corporativa",
     },
     {
         id: 3,
@@ -25,6 +29,8 @@ const eventProducts = [
         category: "Fiestas",
         image: "https://ik.imagekit.io/IV7VRclcnk/eventos/table-decor.webp?updatedAt=1770655440784",
         description: "Elementos decorativos personalizados",
+    
+        hash: "decoracion-mesas",
     },
     {
         id: 4,
@@ -32,6 +38,8 @@ const eventProducts = [
         category: "Bodas",
         image: "https://ik.imagekit.io/IV7VRclcnk/eventos/photobooth.webp?updatedAt=1770655440784",
         description: "Fondos y props para fotografías memorables",
+    
+        hash: "photobooth",
     },
     {
         id: 5,
@@ -39,6 +47,8 @@ const eventProducts = [
         category: "Bodas",
         image: "https://ik.imagekit.io/IV7VRclcnk/eventos/menu-cards.webp?updatedAt=1770655440784",
         description: "Papelería elegante para eventos",
+    
+        hash: "menus-tarjetas",
     },
     {
         id: 6,
@@ -46,6 +56,8 @@ const eventProducts = [
         category: "Corporativo",
         image: "https://ik.imagekit.io/IV7VRclcnk/eventos/promo-stands.webp?updatedAt=1770655440784",
         description: "Displays para ferias y exposiciones",
+    
+        hash: "stands-feria",
     },
     {
         id: 7,
@@ -53,6 +65,8 @@ const eventProducts = [
         category: "Fiestas",
         image: "https://ik.imagekit.io/IV7VRclcnk/eventos/centerpieces.webp?updatedAt=1770655440784",
         description: "Decoración central para mesas de eventos",
+    
+        hash: "centros-mesa",
     },
     {
         id: 8,
@@ -60,6 +74,8 @@ const eventProducts = [
         category: "Corporativo",
         image: "https://ik.imagekit.io/IV7VRclcnk/eventos/directional-signs.webp?updatedAt=1770655440784",
         description: "Guías visuales para eventos grandes",
+    
+        hash: "senaletica-direccional",
     },
     {
         id: 9,
@@ -67,6 +83,8 @@ const eventProducts = [
         category: "Bodas",
         image: "https://ik.imagekit.io/IV7VRclcnk/eventos/backdrop.webp?updatedAt=1770655440784",
         description: "Fondos impresos para ceremonias",
+    
+        hash: "backdrop",
     },
 ];
 
@@ -148,6 +166,7 @@ const seoConfig = {
                     {
                         eventProducts.map((product, index) => (
                             <div
+                                id={product.hash}
                                 class="product-card group bg-white rounded-xl overflow-hidden border-2 border-gray-100 hover:border-primary/60 hover:shadow-2xl transition-all duration-500 cursor-pointer animate-fade-in"
                                 style={`animation-delay: ${index * 50}ms`}
                                 data-category={product.category}

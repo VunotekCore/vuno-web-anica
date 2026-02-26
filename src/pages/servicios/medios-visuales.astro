@@ -9,60 +9,80 @@ const productosIMG = [
         name: "Letras corpóreas en PVC, acrílico y metal",
         short: "Letras de caja iluminadas",
         image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/Letras%20pvc%20caja.webp?updatedAt=1768519835671",
+    
+        hash: "letras-corporeas",
     },
     {
         id: 2,
         name: "SIDEKICK MDF, PVC, COROPLAT 8mm",
         short: "Sidekick publicitario",
         image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/8.webp?updatedAt=1768519835545",
+    
+        hash: "sidekick",
     },
     {
         id: 3,
         name: "SIDEKICK MDF, PVC, COROPLAT 8mm",
         short: "Sidekick publicitario",
         image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/7.webp?updatedAt=1768519835454",
+    
+        hash: "sidekick",
     },
     {
         id: 4,
         name: "EXHIBIDOR PVC",
         short: "Exhibidor de mostrador",
         image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/9.webp?updatedAt=1768519835619",
+    
+        hash: "exhibidor-pvc",
     },
     {
         id: 5,
         name: "STAND PERSONALIZADO",
         short: "Stand de piso a medida",
         image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/Stand.webp?updatedAt=1768519835925",
+    
+        hash: "stand-personalizado",
     },
     {
         id: 6,
         name: "RÓTULOS PVC",
         short: "Señalética y rótulos",
         image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/Se%C3%B1al%C3%A9tica.webp?updatedAt=1768519836008",
+    
+        hash: "rotulos-pvc",
     },
     {
         id: 7,
         name: "VINIL IMPRESO Y STICKERS",
         short: "Viniles y stickers personalizados",
         image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/Stickers.webp?updatedAt=1768519835861",
+    
+        hash: "vinil-stickers",
     },
     {
         id: 8,
         name: "Sublimación y transfer (tazas, textiles, termos, llaveros, lapiceros, lanyards, DTF)",
         short: "Productos promocionales sublimados",
         image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/Promocionales.webp?updatedAt=1768519835797",
+    
+        hash: "sublimacion",
     },
     {
         id: 9,
         name: "Rotulación vehicular completa o parcial • Banners y lonas • Microperforado y vinil reflectivo",
         short: "Rotulación vehicular y gran formato",
         image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/Rotulacion%20vehicular.webp?updatedAt=1768519835851",
+    
+        hash: "rotulacion-vehicular",
     },
     {
         id: 10,
         name: "Roll-ups y displays portátiles",
         short: "Displays portátiles y roll-ups",
         image: "https://ik.imagekit.io/IV7VRclcnk/medios_visuales/21.webp?updatedAt=1768519835800",
+    
+        hash: "roll-ups",
     },
 ];
 
@@ -121,7 +141,7 @@ const seoConfig = {
                     >
                         {
                             productosIMG.slice(0, 7).map((prod) => (
-                                <div class="group bg-gray-50/50 rounded-xl overflow-hidden border border-gray-200 hover:border-primary/60 hover:shadow-xl transition-all duration-300">
+                                <div id={prod.hash} class="group bg-gray-50/50 rounded-xl overflow-hidden border border-gray-200 hover:border-primary/60 hover:shadow-xl transition-all duration-300">
                                     <div class="relative aspect-square bg-gradient-to-br from-primary/5 to-secondary/5">
                                         <img
                                             src={prod.image}
@@ -156,7 +176,7 @@ const seoConfig = {
                     >
                         {
                             productosIMG.slice(7, 10).map((prod) => (
-                                <div class="group bg-gray-50/50 rounded-xl overflow-hidden border border-gray-200 hover:border-primary/60 hover:shadow-xl transition-all duration-300">
+                                <div id={prod.hash} class="group bg-gray-50/50 rounded-xl overflow-hidden border border-gray-200 hover:border-primary/60 hover:shadow-xl transition-all duration-300">
                                     <div class="relative aspect-square bg-gradient-to-br from-primary/5 to-secondary/5">
                                         <img
                                             src={prod.image}
