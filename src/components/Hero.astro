@@ -80,32 +80,61 @@ import HeroSlider from "../components/HeroSlider.astro";
             const handleFocus = () => loadIndex();
 
             const handleInput = (e: Event) => {
-              const query = (e.target as HTMLInputElement).value.toLowerCase();
+              const query = (e.target as HTMLInputElement).value
+                .toLowerCase()
+                .trim();
 
               if (query.length < 2) {
                 searchResults?.classList.add("hidden");
                 return;
               }
 
+              // Buscar en todos los campos relevantes
               const results = searchIndex.filter((item: any) => {
                 const title = item.title?.toLowerCase() || "";
-                const type = item.type?.toLowerCase() || "";
-                return title.includes(query) || type.includes(query);
+                const excerpt = item.excerpt?.toLowerCase() || "";
+                const serviceName = item.serviceName?.toLowerCase() || "";
+                const keywords = Array.isArray(item.keywords)
+                  ? item.keywords.join(" ").toLowerCase()
+                  : "";
+                return (
+                  title.includes(query) ||
+                  excerpt.includes(query) ||
+                  serviceName.includes(query) ||
+                  keywords.includes(query)
+                );
+              });
+
+              // Ordenar: Productos primero (más específicos), luego Servicios
+              results.sort((a: any, b: any) => {
+                if (a.type === "Producto" && b.type !== "Producto") return -1;
+                if (a.type !== "Producto" && b.type === "Producto") return 1;
+                return 0;
               });
 
               if (results.length > 0) {
                 const html = results
-                  .map(
-                    (item) => `
+                  .map((item: any) => {
+                    const isProduct = item.type === "Producto";
+                    const badgeClass = isProduct
+                      ? "bg-secondary/10 text-secondary-dark"
+                      : "bg-primary/10 text-primary";
+                    const parentLabel =
+                      isProduct && item.serviceName
+                        ? `<span class="text-xs text-neutral-light">${item.serviceName}</span>`
+                        : "";
+                    return `
           <a href="${item.url}" class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-50 last:border-0 transition-colors">
             <div class="flex justify-between items-center mb-1">
               <span class="font-bold text-neutral text-sm">${item.title}</span>
-              <span class="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">${item.type}</span>
+              <span class="text-xs px-2 py-0.5 rounded-full ${badgeClass} font-medium">${item.type}</span>
             </div>
-            <p class="text-xs text-neutral-light line-clamp-1">${item.excerpt || ""}</p>
-          </a>
-        `,
-                  )
+            <div class="flex items-center justify-between gap-2">
+              <p class="text-xs text-neutral-light line-clamp-1 flex-1">${item.excerpt || ""}</p>
+              ${parentLabel}
+            </div>
+          </a>`;
+                  })
                   .join("");
 
                 if (searchResults) {
