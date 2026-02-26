@@ -9,17 +9,23 @@ const services = [
     name: "MODELADO 3D",
     image:
       "https://ik.imagekit.io/IV7VRclcnk/diseno_grafico/Dise%C3%B1o%20y%20modelado.webp",
-  },
+  
+        hash: "modelado-3d",
+    },
   {
     id: 2,
     name: "DISEÑO, MODELADO Y RENDERIZADO DE STAND",
     image: "https://ik.imagekit.io/IV7VRclcnk/diseno_grafico/31.webp",
-  },
+  
+        hash: "renderizado-stand",
+    },
   {
     id: 3,
     name: "PAQUETES PERSONALIZADOS",
     image: "https://ik.imagekit.io/IV7VRclcnk/diseno_grafico/32.webp",
-  },
+  
+        hash: "paquetes",
+    },
 ];
 
 const seoConfig = {
@@ -68,7 +74,7 @@ const seoConfig = {
     <section class="w-full py-16 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Identidad Corporativa -->
-        <div class="mb-12">
+        <div class="mb-12" id="identidad-corporativa">
           <h2
             class="text-3xl md:text-4xl font-bold text-neutral mb-4 font-lobster"
           >
@@ -84,7 +90,7 @@ const seoConfig = {
         </div>
 
         <!-- Diseño Editorial -->
-        <div class="mb-12">
+        <div class="mb-12" id="diseno-editorial">
           <h2
             class="text-3xl md:text-4xl font-bold text-neutral mb-4 font-lobster"
           >
@@ -100,7 +106,7 @@ const seoConfig = {
         </div>
 
         <!-- Publicidad Impresa y Digital -->
-        <div class="mb-12">
+        <div class="mb-12" id="publicidad-impresa">
           <h2
             class="text-3xl md:text-4xl font-bold text-neutral mb-4 font-lobster"
           >
@@ -116,7 +122,7 @@ const seoConfig = {
         </div>
 
         <!-- Diseño para redes sociales -->
-        <div class="mb-16">
+        <div class="mb-16" id="redes-sociales">
           <h2
             class="text-3xl md:text-4xl font-bold text-neutral mb-4 font-lobster"
           >
@@ -133,6 +139,7 @@ const seoConfig = {
 
         <!-- Modelado 3D & Renderizado - Special Subsection -->
         <div
+          id="modelado-3d"
           class="bg-gradient-to-br from-accent/10 to-secondary/10 rounded-2xl p-8 md:p-12 mb-12"
         >
           <h2
@@ -206,6 +213,7 @@ const seoConfig = {
 
           <!-- Featured Image: 3D Rendering -->
           <div
+            id="renderizado-stand"
             class="bg-white rounded-xl p-8 border-2 border-accent-dark hover:border-accent transition-all duration-300 hover:shadow-xl mb-8"
           >
             <div
@@ -226,7 +234,7 @@ const seoConfig = {
         </div>
 
         <!-- Packaging -->
-        <div class="mb-12">
+        <div class="mb-12" id="packaging">
           <h2
             class="text-3xl md:text-4xl font-bold text-neutral mb-4 font-lobster"
           >
@@ -264,6 +272,7 @@ const seoConfig = {
         </div>
         <!-- CTA Section -->
         <div
+          id="paquetes"
           class="mt-16 text-center bg-gradient-to-r from-accent/10 via-primary/10 to-secondary/10 rounded-2xl p-12"
         >
           <h3 class="text-3xl font-bold text-neutral mb-4 font-lobster">
